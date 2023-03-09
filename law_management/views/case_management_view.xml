@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+  <data>
+
+	    <menuitem name="Case Management" id="menu_case_management"/>
+
+	    <menuitem name="Case Management" id="menu_case_management_forms" parent="menu_case_management"/>
+	
+	</data>
+</odoo>

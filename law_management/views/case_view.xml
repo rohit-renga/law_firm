@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+        <!-- Case stages form -->
+        <record id="view_case_stages_tree" model="ir.ui.view">
+          <field name="name">case.stages.tree</field>
+          <field name="model">case.stages</field>
+          <field name="arch" type="xml">
+                <tree string="Case Stages" duplicate="false">
+                    <field name="case_stages"/>                 
+                </tree>
+          </field>
+        </record>
+
+        <record id="view_case_stages_form" model="ir.ui.view">
+          <field name="name">case.stages.form</field>
+          <field name="model">case.stages</field>
+            <field name="arch" type="xml">
+                <form string="Case Stages" duplicate="false">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="case_stages" required="1"/>
+                                <field name="case_defalut_stage"/>
+                                <field name="case_sequence"/>
+                            </group>
+                            <group>
+                                <field name="date"/>
+                                <field name="case_stages_created_by" options='{"no_open": True}'/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="case_stages_action">
+          <field name="name">Case Stages</field>
+          <field name="res_model">case.stages</field>
+          <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_case_stages_category" parent="menu_case_master_data"  action="case_stages_action" sequence="1"/>
+
+        <menuitem id="project.menu_project_config_project" action="project.open_task_type_form" parent="menu_case_master_data" sequence="4"/>
+        
+        <!-- Case stages end -->
+
+        <!-- Case Priority start -->
+        <record id="view_case_priority_tree" model="ir.ui.view">
+          <field name="name">case.priority.tree</field>
+          <field name="model">case.priority</field>
+          <field name="arch" type="xml">
+                <tree string="Case Priority" duplicate="false">
+                    <field name="case_priority"/>
+                </tree>
+          </field>
+        </record>
+
+        <record id="view_case_priority_form" model="ir.ui.view">
+          <field name="name">case.priority.form</field>
+          <field name="model">case.priority</field>
+            <field name="arch" type="xml">
+                <form string="Case Priority" duplicate="false">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="case_priority"/>
+                            </group>
+                            <group>
+                              <field name="case_description"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="case_priority_action">
+          <field name="name">Case Priority</field>
+          <field name="res_model">case.priority</field>
+          <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_case_priority_category" parent="menu_case_master_data"  action="case_priority_action" sequence="2"/>
+        <!-- Case Priority end-->
+
+    <!-- Case category start -->
+    <record id="view_case_category_tree" model="ir.ui.view">
+      <field name="name">case.category.tree</field>
+      <field name="model">case.category</field>
+      <field name="arch" type="xml">
+            <tree string="Case Category" duplicate="false">
+                <field name="type"/>
+                <field name="name"/>
+            </tree>
+      </field>
+    </record>
+
+    <record id="view_case_category_form" model="ir.ui.view">
+      <field name="name">case.category.form</field>
+      <field name="model">case.category</field>
+        <field name="arch" type="xml">
+            <form string="Case Category" duplicate="false">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="type" required="1"/>
+                            <field name="name" required="1"/>
+                            <field name="code"/>
+                            <field name="description"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                            <field name="case_stages_created_by" options='{"no_open": True}'/>
+                        </group>
+                    </group>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="case_category_action">
+      <field name="name">Case Category</field>
+      <field name="res_model">case.category</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_case_category" parent="menu_case_master_data"  action="case_category_action" sequence="3"/>
+    <!-- Case category end -->
+
+ </data>
+</odoo>

@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <!-- Opposition lawyer start -->
+    <record id="view_opposition_lawyer_tree" model="ir.ui.view">
+      <field name="name">opposition.lawyer.tree</field>
+      <field name="model">opposition.lawyer</field>
+      <field name="arch" type="xml">
+            <tree string="Plaintiff Lawyer" duplicate="false">
+              <field name="opposition_lawyer_name"/>
+              <field name="opposition_mobileP"/>
+              <field name="opposition_mobileW"/>
+              <field name="opposition_emailP"/>
+              <field name="opposition_emailW"/>
+            </tree>
+      </field>
+    </record>
+
+    <record id="view_opposition_lawyer_form" model="ir.ui.view">
+      <field name="name">opposition.lawyer.form</field>
+      <field name="model">opposition.lawyer</field>
+        <field name="arch" type="xml">
+          <form string="Plaintiff Lawyer Details" duplicate="false">
+            <sheet>
+              <div class="oe_button_box" name="button_box">
+                <button name="action_opposition_lawyer_account_view" type="object" class="oe_stat_button" icon="fa-money">
+                  <field string="Account" name="account" widget="statinfo"/>
+                </button>
+                <button name="action_opp_lawyer_document" type="object" class="oe_stat_button" icon="fa-pencil-square-o">
+                    <field string="Documents" name="ol_doc_count" widget="statinfo"/>
+                </button>
+              </div>
+                <field name="image" widget="image" class="oe_avatar" />
+                  <div class="oe_title">
+                      <h1>
+                          <field name="opposition_id" readonly="1" />
+                      </h1>
+                      <h1>
+                        <field name="opposition_lawyer_name" placeholder="Name" required="1"/>
+                      </h1>
+                  </div>
+              <group>
+                  <group string="General Information">
+                    <field name="opposition_lawyer_type" required="1"/>
+                    <field name="ol_or_company_reg_id" attrs="{'invisible':['|',('opposition_lawyer_type','=','individual'),('opposition_lawyer_type','=',False)]}"/>
+                    <field name="ol_or_country_reg_id" attrs="{'invisible':['|',('opposition_lawyer_type','=','individual'),('opposition_lawyer_type','=',False)]}"/>
+                    <field name="opposition_lawyer_nationality" attrs="{'invisible': ['|',('opposition_lawyer_type','=','organisation'),('opposition_lawyer_type','=',False)],'required':[('opposition_lawyer_type','=','individual')]}"/>
+                    <field name="opposition_lawyer_nationality_code" attrs="{'invisible':['|',('opposition_lawyer_type','=','organisation'),('opposition_lawyer_type','=',False)]}" readonly="1"/>
+                  </group>
+                  <group string="Contact Information">
+                    <field name="opposition_phone" invisible="1"/>
+                    <field name="opposition_mobileP" required="1"/>
+                    <field name="opposition_mobileW" invisible="1"/>
+                    <field name="opposition_emailP" invisible="1"/>
+                    <field name="opposition_emailW" invisible="1"/>
+                    <field name="opposition_website" invisible="1"/>
+                    <field name="opp_lawyer_created_by" options='{"no_open": True}'/>
+                  </group>
+              </group>
+                <group>
+                  <group string="Physical Address">
+                      <label for="street" string="Address"/>
+                      <div class="o_address_format">
+                          <field name="street" placeholder="Street..." class="o_address_street"/>
+                          <field name="street2" placeholder="Street 2..." class="o_address_street" />
+                          <field name="city_id" placeholder="City" class="o_address_city" style="width: 48%"/>
+                          <field name="village" placeholder="Village" class="o_address_city"/>
+                          <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open":True}' context="{'country_id': country_id,'zip': zip}" style="width: 48%"/>
+                          <field name="zip" placeholder="ZIP" class="o_address_zip" style="width: 48%"/>
+                          <field name="district_id" placeholder="District" style="width: 52%"/>
+                          <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open":True, "no_create": True}' />
+                      </div>
+                  </group>
+                  <group string="Postal Address">
+                      <field name="copy_address"/>
+                      <label for="postal_street" string="Postal Address"/>
+                      <div class="o_address_format">
+                          <field name="postal_street" placeholder="Street..." class="o_address_street"/>
+                          <field name="postal_street2" placeholder="Street 2..." class="o_address_street" />
+                          <field name="postal_city_id" placeholder="City" class="o_address_city" style="width: 48%"/>
+                          <field name="postal_village" placeholder="Village" class="o_address_city"/>
+                          <field name="postal_state_id" class="o_address_state" placeholder="State" options='{"no_open":True}' context="{'country_id': postal_country_id,'zip': postal_zip}" style="width: 48%"/>
+                          <field name="postal_zip" placeholder="ZIP" class="o_address_zip" style="width: 48%"/>
+                          <field name="postal_district_id" placeholder="District" style="width: 52%"/>
+                          <field name="postal_country_id" placeholder="Country" class="o_address_country" options='{"no_open":True, "no_create": True}' />
+                      </div>
+                  </group>
+                </group>
+                  <notebook>
+                    <page string="Account">
+                      <field name="account_details_ids" domain="[('opp_lawyer_account','=',active_id)]" readonly="1">
+                        <tree>
+                          <field name="account_number"/>
+                          <field name="opp_lawyer_account"/>
+                          <field name="bank"/>
+                          <field name="account_type"/>
+                        </tree>
+                      </field>
+                    </page>
+                    <page string="Documents">
+                        <field name="opp_lawyer_doc_ids" domain="[('opp_lawyer_document_id','=',active_id)]" readonly="1">
+                            <tree>
+                                <field name="doc_name"/>
+                                <field name="doc_id" widget="many2many_binary"/>
+                                <field name="date"/>
+                                <field name="comment"/>
+                                <field name="ol_d_created_by"/>
+                              </tree>
+                        </field>
+                    </page>
+                  </notebook>
+              </sheet>
+              <div class="oe_chatter">
+                  <field name="message_follower_ids" widget="mail_followers"/>
+                  <field name="message_ids" widget="mail_thread"/>
+              </div>
+          </form>
+        </field>
+    </record>
+
+    <record id="view_opposition_details_kanban" model="ir.ui.view">
+      <field name="name">opposition.lawyer.kanban</field>
+      <field name="model">opposition.lawyer</field>
+      <field name="arch" type="xml">
+          <kanban class="o_hr_employee_kanban">
+              <field name="id"/>
+              <field name="image"/>
+              <field name="opposition_lawyer_name"/>
+              <field name="opposition_mobileW"/>
+              <field name="opposition_emailW"/>
+                 <templates>
+                  <t t-name="kanban-box">
+                  <div class="oe_kanban_global_click">
+                      <div class="o_kanban_image">
+                          <img t-att-src="kanban_image('opposition.lawyer', 'image', record.id.raw_value)"/>
+                      </div>
+                      <div class="oe_kanban_details">
+                          <ul>
+                              <li t-if="record.opposition_lawyer_name.raw_value"><field name="opposition_lawyer_name"/></li>
+                              <li t-if="record.opposition_mobileW.raw_value">
+                                <i class="fa fa-phone"></i><field name="opposition_mobileW"/></li>
+                              <li t-if="record.opposition_emailW.raw_value">
+                                <i class="fa fa-envelope"></i><field name="opposition_emailW"/></li>
+                          </ul>
+                      </div>
+                  </div>
+                  </t>
+              </templates>
+          </kanban>
+        </field>
+    </record>
+
+<!--     <record id="view_opposition_details_search" model="ir.ui.view">
+      <field name="name">opposition.lawyer.search</field>
+      <field name="model">opposition.lawyer</field>
+        <field name="arch" type="xml">
+              <search>
+                  <field name="opposition_lawyer_name"/>
+                  <field name="opposition_mobileW"/>
+                  <field name="opposition_emailW"/>
+                  <field name="opposition_type"/>
+                  <field name="lawyer_experience"/>
+                  <filter name="fil_type" domain="[]" string="Type" context="{'group_by':'lawyer_type'}"/>
+              </search>
+        </field>
+    </record> -->
+
+    <record model="ir.actions.act_window" id="opposition_lawyer_action">
+          <field name="name">Plaintiff Lawyer</field>
+          <field name="res_model">opposition.lawyer</field>
+          <field name="view_mode">tree,form,kanban</field>
+<!--           <field name="search_view_id" ref="view_opposition_details_search"/>
+          <field name="context">{'search_default_fil_location': 1}</field>
+ -->
+    </record>
+
+    <menuitem id="menu_opposition_lawyer" parent="menu_master_data"  action="opposition_lawyer_action" sequence="4"/>
+    <!-- Opposition lawyer end -->
+
+      <!--Opposition  Lawyer Document View Start-->
+      <record id="view_opp_lawyer_document_tree" model="ir.ui.view">
+        <field name="name">opp.lawyer.document.tree</field>
+        <field name="model">opp.lawyer.document</field>
+        <field name="arch" type="xml">
+              <tree string="Plaintiff Lawyer Document" delete="0" duplicate="false">
+                  <field name="doc_name"/>
+                    <field name="doc_id"/>
+                    <field name="comment"/>
+                    <field name="date"/>
+                    <field name="ol_d_created_by"/>
+              </tree>
+          </field>
+      </record>
+
+      <record id="view_opp_lawyer_document_form" model="ir.ui.view">
+        <field name="name">opp.lawyer.document.form</field>
+        <field name="model">opp.lawyer.document</field>
+        <field name="arch" type="xml">
+            <form string="Plaintiff Lawyer Document" delete="0" duplicate="false">
+              <sheet>
+                  <group>
+                    <group>
+                      <field name="opp_lawyer_document_id" required="1" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                      <field name="doc_name"/>
+                      <field name="doc_no"/>
+                      <field name="doc_id" widget="many2many_binary"/>
+                    </group>
+                    <group>
+                      <field name="date"/>
+                      <field name="comment"/>
+                      <field name="ol_d_created_by" options='{"no_open": True}'/>
+                    </group>
+                  </group>
+              </sheet>
+            </form>
+        </field>
+      </record>
+
+      <record model="ir.actions.act_window" id="opp_lawyer_document_action">
+          <field name="name">Plaintiff Lawyer Document</field>
+          <field name="res_model">opp.lawyer.document</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,form</field>
+          <field name="domain">[]</field>
+          <field name="context">{}</field>
+      </record>
+
+      <!-- <menuitem id="menu_opp_lawyer_document" name="defendant/Plaintiff Lawyer" parent="menu_documents_forms" sequence="3" action="opp_lawyer_document_action"/> -->
+      <!--Lawyer Document View End-->
+  </data>
+</odoo>

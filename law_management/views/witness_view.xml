@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+	  <!--Witness Details Start-->
+      <record id="view_witness_details_tree" model="ir.ui.view">
+      <field name="name">witness.details.tree</field>
+      <field name="model">witness.details</field>
+      <field name="arch" type="xml">
+            <tree string="Witness Details" duplicate="false">
+                <field name="witness_name"/>
+                <field name="witness_mobile"/>
+                <field name="witness_email"/>
+                <field name="witness_name_nationality"/>
+                <field name="witness_name_nationality_code"/>
+            </tree>
+      </field>
+    </record>
+
+    <record id="view_witness_details_form" model="ir.ui.view">
+      <field name="name">witness.details.form</field>
+      <field name="model">witness.details</field>
+      <field name="arch" type="xml">
+          <form string="Witness Details" duplicate="false">
+            <sheet>
+              <div class="oe_button_box" name="button_box">
+                <button name="action_witness_document" type="object" class="oe_stat_button" icon="fa-pencil-square-o">
+                      <field string="Documents" name="w_doc_count" widget="statinfo"/>
+                  </button>
+              </div>
+              <field name="image" widget="image" class="oe_avatar" />
+                  <div class="oe_title">
+                      <h1>
+                          <field name="witness_id" readonly="1" />
+                      </h1>
+                      <h1>
+                          <field name="witness_name" placeholder="Witness Name" required="1"/>  
+                      </h1>
+                  </div>
+              <group>
+                  <group string="General Information">
+                    <field name="witness_name_nationality" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' required="1"/>
+                    <field name="witness_name_nationality_code" readonly="1"/>
+                  </group>
+                  <group string="Contact Information">
+                    <field name="witness_mobile" required="1"/>
+                    <field name="witness_phone"/>
+                    <field name="witness_email"/>
+                    <field name="witness_website"/>
+                    <field name="witness_created_by" options='{"no_open": True}'/>
+                  </group>
+              </group>
+              <group>
+                <group string="Physical Address">
+                    <label for="street" string="Address"/>
+                    <div class="o_address_format">
+                        <field name="street" placeholder="Street..." class="o_address_street" required="1"/>
+                        <field name="street2" placeholder="Street 2..." class="o_address_street" required="1"/>
+                        <field name="city_id" placeholder="City" class="o_address_city" style="width: 48%" required="1"/>
+                        <field name="village" placeholder="Village" class="o_address_city" required="1"/>
+                        <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open":True}' context="{'country_id': country_id,'zip': zip}" style="width: 48%" required="1"/>
+                        <field name="zip" placeholder="ZIP" class="o_address_zip" style="width: 48%" />
+                        <field name="district_id" placeholder="District" style="width: 52%"/>
+                        <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open":True, "no_create": True}' required="1"/>
+                    </div>
+                </group>
+                <group string="Postal Address">
+                    <field name="copy_address"/>
+                    <label for="postal_street" string="Postal Address"/>
+                    <div class="o_address_format">
+                        <field name="postal_street" placeholder="Street..." class="o_address_street" required="1"/>
+                        <field name="postal_street2" placeholder="Street 2..." class="o_address_street" required="1"/>
+                        <field name="postal_city_id" placeholder="City" class="o_address_city" style="width: 48%" required="1"/>
+                        <field name="postal_village" placeholder="Village" class="o_address_city" required="1"/>
+                        <field name="postal_state_id" class="o_address_state" placeholder="State" options='{"no_open":True}' context="{'country_id': postal_country_id,'zip': postal_zip}" style="width: 48%" required="1"/>
+                        <field name="postal_zip" placeholder="ZIP" class="o_address_zip" style="width: 48%"/>
+                        <field name="postal_district_id" placeholder="District" style="width: 52%"/>
+                        <field name="postal_country_id" placeholder="Country" class="o_address_country" options='{"no_open":True, "no_create": True}' required="1"/>
+                    </div>
+                </group>
+              </group>
+                <notebook>
+                  <page string="Documents">
+                    <field name="witness_doc_ids" domain="[('witness_document_id','=',active_id)]" readonly="1">
+                      <tree>
+                          <field name="doc_name"/>
+                          <field name="doc_id" widget="many2many_binary"/>
+                          <field name="date"/>
+                          <field name="comment"/>
+                          <field name="wd_created_by"/>
+                      </tree>
+                  </field>
+                  </page>
+                </notebook>
+              </sheet>
+              <div class="oe_chatter">
+                  <field name="message_follower_ids" widget="mail_followers"/>
+                  <field name="message_ids" widget="mail_thread"/>
+              </div>
+          </form>
+      </field>
+    </record>
+
+    <record id="view_witness_details_kanban" model="ir.ui.view">
+      <field name="name">witness.details.kanban</field>
+      <field name="model">witness.details</field>
+      <field name="arch" type="xml">
+          <kanban class="o_hr_employee_kanban">
+                <field name="id"/>
+                <field name="image"/>
+                <field name="witness_name"/>
+                <field name="witness_name_nationality"/>
+                <field name="witness_name_nationality_code"/>
+              <templates>
+                  <t t-name="kanban-box">
+                      <div class="oe_kanban_global_click o_res_partner_kanban">
+                          <div class="o_kanban_image">
+                              <img t-att-src="kanban_image('witness.details', 'image', record.id.raw_value)"/>
+                          </div>
+                          <div class="oe_kanban_details">
+                              <div class="o_kanban_tags_section oe_kanban_partner_categories"/>
+                              <ul>
+                                  <li t-if="record.witness_name.raw_value"><field name="witness_name"/></li>
+                                  <li t-if="record.witness_mobile.raw_value">
+                                  <i class="fa fa-phone"></i><field name="witness_mobile"/></li>
+                              </ul>
+                          </div>
+                      </div>
+                  </t>
+              </templates>
+          </kanban>
+      </field>
+    </record>
+
+    <record id="view_witness_details_search" model="ir.ui.view">
+          <field name="name">witness.details.search</field>
+          <field name="model">witness.details</field>
+            <field name="arch" type="xml">
+                  <search>
+                      <field name="witness_name"/>
+                      <field name="witness_past_criminal"/>
+                      <filter name="witness_past_criminal" domain="[]" string="Past Criminal" context="{'group_by':'witness_past_criminal'}"/>
+                    </search>
+            </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="witness_details_action">
+        <field name="name">Witness</field>
+        <field name="res_model">witness.details</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="search_view_id" ref="view_witness_details_search"/>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+   
+      <menuitem id="menu_witness_details" name="Witness" parent="menu_master_data" sequence="6" action="witness_details_action"/>
+      <!--Witness Details End-->
+
+        <!--Lawyer Document View Start-->
+        <record id="view_witness_document_tree" model="ir.ui.view">
+          <field name="name">witness.document.tree</field>
+          <field name="model">witness.document</field>
+          <field name="arch" type="xml">
+                <tree string="Witness Document" delete="0" duplicate="false">
+                    <field name="doc_name"/>
+                    <field name="doc_id" widget="many2many_binary"/>
+                    <field name="comment"/>
+                    <field name="date"/>
+                    <field name="wd_created_by"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_witness_document_form" model="ir.ui.view">
+          <field name="name">witness.document.form</field>
+          <field name="model">witness.document</field>
+          <field name="arch" type="xml">
+              <form string="Witness Document" delete="0" duplicate="false">
+                <sheet>
+                    <group>
+                      <group>
+                        <field name="witness_document_id" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' required="1"/>
+                        <field name="doc_name"/>
+                        <field name="doc_no"/>
+                        <field name="doc_id" widget="many2many_binary"/>
+                      </group>
+                      <group>
+                        <field name="date"/>
+                        <field name="comment"/>
+                        <field name="wd_created_by" options='{"no_open": True}'/>
+                      </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+              </form>
+          </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="witness_document_action">
+            <field name="name">Witness Document</field>
+            <field name="res_model">witness.document</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <!-- <menuitem id="menu_witness_document" name="Witness" parent="menu_documents_forms" sequence="4" action="witness_document_action"/> -->
+        <!--Lawyer Document View End-->
+  </data>
+</odoo>

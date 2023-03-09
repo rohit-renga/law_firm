@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+		<!--Lawyer Details Start-->
+        <record id="view_lawyer_details_tree" model="ir.ui.view">
+          <field name="name">lawyer.details.tree</field>
+          <field name="model">lawyer.details</field>
+          <field name="arch" type="xml">
+                <tree string="Lawyer Details" duplicate="false">
+                    <field name="lawyer_name"/>
+                </tree>
+          </field>
+        </record>
+
+        <record id="view_lawyer_details_form" model="ir.ui.view">
+          <field name="name">lawyer.details.form</field>
+          <field name="model">lawyer.details</field>
+          <field name="arch" type="xml">
+              <form string="Lawyer Details" duplicate="false">
+                <sheet>
+                  <div class="oe_button_box" name="button_box">
+                    <!-- <button name="toggle_active" type="object"
+                            class="oe_stat_button" icon="fa-archive">
+                        <field name="active" widget="boolean_button"
+                            options='{"terminology": "archive"}'/>
+                    </button> -->
+                    <button name="lawyer_account_view_action" type="object" class="oe_stat_button" icon="fa-money">
+                      <field string="Account" name="lawyer_account" widget="statinfo"/>
+                    </button>
+                    <button name="action_lawyer_invoices" type="object" class="oe_stat_button" icon="fa-pencil-square-o">
+                      <field string="Invoiced" name="invoiced" widget="statinfo"/>
+                    </button>
+                    <!-- <button name="action_won_cases_view" type="object" class="oe_stat_button" icon="fa-gavel">
+                      <field string="Won Cases" name="won_cases" widget="statinfo"/>
+                    </button> -->
+                    <!-- <button name="action_lost_cases_view" type="object" class="oe_stat_button" icon="fa-gavel">
+                      <field string="Lost Cases" name="lost_cases" widget="statinfo"/>
+                    </button> -->
+<!--                     <button name="action_ongoing_cases_view" type="object" class="oe_stat_button" icon="fa-money">
+                      <field string="Ongoing Cases" name="ongoing_cases" widget="statinfo"/>
+                    </button> -->
+                    <!-- <button name="action_total_cases_view" type="object" class="oe_stat_button" icon="fa-gavel">
+                      <field string="Total Cases" name="total_cases" widget="statinfo"/>
+                    </button> -->
+                    <!-- <button name="action_settlement_cases_view" type="object" class="oe_stat_button" icon="fa-gavel">
+                      <field string="Settlement Cases" name="settlement_cases" widget="statinfo"/> 
+                    </button>-->
+                    <button name="action_lawyer_expenses" type="object" class="oe_stat_button" icon="fa-pencil-square-o">
+                      <field string="Expenses" name="expenses" widget="statinfo"/>
+                    </button>
+                    <button name="action_lawyer_document" type="object" class="oe_stat_button" icon="fa-pencil-square-o">
+                        <field string="Documents" name="l_doc_count" widget="statinfo"/>
+                    </button>
+                  </div>
+                    <field name="image" widget="image" class="oe_avatar" />
+                      <div class="oe_title">
+                          <h1>
+                          <field name="lawyer_id" readonly="1" />
+                          </h1>
+                          <h1>
+                            <field name="lawyer_name" placeholder="Name" required="1"/>
+                          </h1>
+                      </div>
+                      <group string="General Information">
+                        <group>
+                          <field name="lawyer_nationality" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' required="1"/>
+                          <field name="lawyer_nationality_code" readonly="1"/>
+                        </group>
+                        <group>
+                          <field name="lawyer_mobileP"/>
+                          <field name="lawyer_emailP" invisible="1"/>
+                          <field name="lawyer_emailW" />
+                        </group>
+                      </group>
+                      <notebook>
+                        <page string="Account">
+                          <field name="lawyer_account_details_ids" domain="[('lawyer_account','=',active_id)]" readonly="1">
+                            <tree>
+                              <field name="account_number"/>
+                              <field name="lawyer_account"/>
+                              <field name="bank"/>
+                              <field name="account_type"/>
+                            </tree>
+                          </field>
+                        </page>
+                        <page string="Documents">
+                          <field name="lawyer_doc_ids" domain="[('lawyer_document_id','=',active_id)]" readonly="1">
+                              <tree create="false" edit="false" editable="false">
+                                <field name="doc_name"/>
+                                <field name="doc_id" widget="many2many_binary"/>
+                                <field name="date"/>
+                                <field name="comment"/>
+                                <field name="ld_created_by"/>
+                              </tree>
+                          </field>
+                        </page>
+                        <page string="On Going">
+                          <field name="ongoing_case_ids" readonly="1">
+                            <tree create="false" edit="false" editable="false">
+                              <field name="matter_seq"/>
+                              <field name="case_name"/>
+                              <field name="category_id"/>
+                              <field name="client_name"/>
+                              <field name="accused"/>
+                              <field name="case_result"/>
+                              <field name="opp_lawyer_id"/>
+                              <field name="judge_id"/>
+                            </tree>
+                          </field>
+                        </page>
+                        <page string="Won">
+                          <field name="won_case_ids" readonly="1">
+                          <tree create="false" edit="false" editable="false">
+                              <field name="matter_seq"/>
+                              <field name="case_name"/>
+                              <field name="category_id"/>
+                              <field name="client_name"/>
+                              <field name="accused"/>
+                              <field name="case_result"/>
+                              <field name="opp_lawyer_id"/>
+                              <field name="judge_id"/>
+                            </tree>
+                          </field>
+                        </page>
+                        <page string="Lost">
+                          <field name="lost_case_ids" readonly="1">
+                          <tree create="false" edit="false" editable="false">
+                              <field name="matter_seq"/>
+                              <field name="case_name"/>
+                              <field name="category_id"/>
+                              <field name="client_name"/>
+                              <field name="accused"/>
+                              <field name="case_result"/>
+                              <field name="opp_lawyer_id"/>
+                              <field name="judge_id"/>
+                            </tree>
+                          </field>
+                        </page>
+                        <page string="Settlement">
+                          <field name="settlement_case_ids" readonly="1">
+                          <tree create="false" edit="false" editable="false">
+                              <field name="matter_seq"/>
+                              <field name="case_name"/>
+                              <field name="category_id"/>
+                              <field name="client_name"/>
+                              <field name="accused"/>
+                              <field name="case_result"/>
+                              <field name="opp_lawyer_id"/>
+                              <field name="judge_id"/>
+                            </tree>
+                          </field>
+                        </page>
+                      </notebook>
+                  </sheet>
+                  <div class="oe_chatter">
+                      <field name="message_follower_ids" widget="mail_followers"/>
+                      <field name="message_ids" widget="mail_thread"/>
+                  </div>
+              </form>
+          </field>
+        </record>
+
+
+        <record id="view_lawyer_details_kanban" model="ir.ui.view">
+          <field name="name">lawyer.details.kanban</field>
+          <field name="model">lawyer.details</field>
+          <field name="arch" type="xml">
+              <kanban class="o_hr_employee_kanban">
+                  <field name="id"/>
+                  <field name="image"/>
+                  <field name="lawyer_name"/>
+                     <templates>
+                      <t t-name="kanban-box">
+                      <div class="oe_kanban_global_click">
+                          <div class="o_kanban_image">
+                              <img t-att-src="kanban_image('lawyer.details', 'image', record.id.raw_value)"/>
+                          </div>
+                          <div class="oe_kanban_details">
+                              <ul>
+                                  <li t-if="record.lawyer_name.raw_value"><field name="lawyer_name"/></li>
+                              </ul>
+                          </div>
+                      </div>
+                      </t>
+                  </templates>
+              </kanban>
+            </field>
+        </record> 
+
+        <record id="view_lawyer_details_search" model="ir.ui.view">
+          <field name="name">lawyer.details.search</field>
+          <field name="model">lawyer.details</field>
+            <field name="arch" type="xml">
+                  <search>
+                      <field name="lawyer_name"/>
+                  </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="lawyer_details_action">
+            <field name="name">Lawyer</field>
+            <field name="res_model">lawyer.details</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="search_view_id" ref="view_lawyer_details_search"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem id="menu_lawyer_details" name="Lawyer" parent="menu_master_data" sequence="3" action="lawyer_details_action"/>
+        <!--Lawyer Details End-->
+
+        <!--Lawyer Document View Start-->
+        <record id="view_lawyer_document_tree" model="ir.ui.view">
+          <field name="name">lawyer.document.tree</field>
+          <field name="model">lawyer.document</field>
+          <field name="arch" type="xml">
+                <tree string="Lawyer Document" delete="0" duplicate="false">
+                    <field name="doc_name"/>
+                    <field name="doc_id" widget="many2many_binary"/>
+                    <field name="comment"/>
+                    <field name="date"/>
+                    <field name="ld_created_by"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_lawyer_document_form" model="ir.ui.view">
+          <field name="name">lawyer.document.form</field>
+          <field name="model">lawyer.document</field>
+          <field name="arch" type="xml">
+              <form string="Lawyer Document" delete="0" duplicate="false">
+                <sheet>
+                    <group>
+                      <group>
+                        <field name="lawyer_document_id" required="1" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                        <field name="doc_name"/>
+                        <field name="doc_no"/>
+                        <field name="doc_id" widget="many2many_binary"/>
+                      </group>
+                      <group>
+                        <field name="date"/>
+                        <field name="comment"/>
+                        <field name="ld_created_by" options='{"no_open": True}'/>
+                      </group>
+                    </group>
+                </sheet>
+              </form>
+          </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="lawyer_document_action">
+            <field name="name">Lawyer Document</field>
+            <field name="res_model">lawyer.document</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <!-- <menuitem id="menu_lawyer_document" name="Lawyer" parent="menu_documents_forms" sequence="2" action="lawyer_document_action"/> -->
+        <!--Lawyer Document View End-->
+    </data>
+</odoo>

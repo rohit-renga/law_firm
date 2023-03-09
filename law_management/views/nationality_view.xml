@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <!-- Law code start -->
+    <record id="view_nationality_master_tree" model="ir.ui.view">
+      <field name="name">nationality.master.tree</field>
+      <field name="model">nationality.master</field>
+      <field name="arch" type="xml">
+            <tree string="Nationality" duplicate="false">
+                <field name="name"/>
+                <field name="nationality_code"/>
+            </tree>
+      </field>
+    </record>
+
+    <record id="view_nationality_master_form" model="ir.ui.view">
+      <field name="name">nationality.master.form</field>
+      <field name="model">nationality.master</field>
+        <field name="arch" type="xml">
+            <form string="Nationality" duplicate="false">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="nationality_code" required="1"/>
+                    </group>
+                    <group>
+                      <group string="Physical Address">
+                          <label for="ph_street" string="Address"/>
+                          <div class="o_address_format">
+                              <field name="ph_street" placeholder="Street..." class="o_address_street"/>
+                              <field name="ph_street2" placeholder="Street 2..." class="o_address_street" />
+                              <field name="ph_city_id" placeholder="City" class="o_address_city" style="width: 48%"/>
+                              <field name="ph_village" placeholder="Village" class="o_address_city"/>
+                              <field name="ph_state_id" class="o_address_state" placeholder="State" options='{"no_open":True}' context="{'ph_country_id': ph_country_id,'ph_zip': ph_zip}" style="width: 48%"/>
+                              <field name="ph_district_id" placeholder="District" style="width: 52%"/>
+                              <field name="ph_zip" placeholder="ZIP" class="o_address_zip" style="width: 48%"/>
+                              <field name="ph_country_id" placeholder="Country" class="o_address_country" options='{"no_open":True, "no_create": True}' />
+                          </div>
+                      </group>
+                      <group string="Postal Address">
+                          <label for="po_street" string="Address"/>
+                          <div class="o_address_format">
+                              <field name="po_street" placeholder="Street..." class="o_address_street"/>
+                              <field name="po_street2" placeholder="Street 2..." class="o_address_street" />
+                              <field name="po_city_id" placeholder="City" class="o_address_city" style="width: 48%"/>
+                              <field name="po_village" placeholder="Village" class="o_address_city"/>
+                              <field name="po_state_id" class="o_address_state" placeholder="State" options='{"no_open":True}' context="{'po_country_id': po_country_id,'po_zip': po_zip}" style="width: 48%"/>
+                              <field name="po_district_id" placeholder="District" style="width: 52%"/>
+                              <field name="po_zip" placeholder="ZIP" class="o_address_zip" style="width: 48%"/>
+                              <field name="po_country_id" placeholder="Country" class="o_address_country" options='{"no_open":True, "no_create": True}' />
+                          </div>
+                      </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="nationality_master_action">
+      <field name="name">Nationality</field>
+      <field name="res_model">nationality.master</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="domain">[]</field>
+      <field name="context">{}</field>
+  </record>
+
+
+     <menuitem id="menu_nationality_master" parent="menu_general_data" action="nationality_master_action" sequence="4"/>
+
+ </data>
+</odoo>

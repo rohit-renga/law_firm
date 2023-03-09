@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <record id="seq_matter" model="ir.sequence">
+            <field name="name">Matter</field>
+            <field name="code">matter.matter</field>
+            <field name="prefix">CASE/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!--claim-->
+        <record id="seq_claim" model="ir.sequence">
+            <field name="name">Claim</field>
+            <field name="code">matter.claim</field>
+            <field name="prefix">Claim/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!--claim distribution-->
+        <record id="seq_dis" model="ir.sequence">
+            <field name="name">Claim Distribution</field>
+            <field name="code">claim.distribution</field>
+            <field name="prefix">CD/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!--claim transaction-->
+        <record id="seq_tra" model="ir.sequence">
+            <field name="name">Claim transaction</field>
+            <field name="code">claim.distribution.transaction</field>
+            <field name="prefix">CT/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!--payment schedule-->
+        <record id="seq_pay" model="ir.sequence">
+            <field name="name">Payment schedule</field>
+            <field name="code">payment.schedule</field>
+            <field name="prefix">PS/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Judgement sequence -->
+        <record id="seq_judgement" model="ir.sequence">
+            <field name="name">Judgement</field>
+            <field name="code">case.trail.judgement</field>
+            <field name="prefix">J/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Acts -->
+        <record id="ssequence_acts" model="ir.sequence">
+            <field name="name">Acts</field>
+            <field name="code">act.act</field>
+            <field name="prefix">A/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Article -->
+        <record id="sequence_article" model="ir.sequence">
+            <field name="name">Article</field>
+            <field name="code">article.article</field>
+            <field name="prefix">AR/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Court Room -->
+        <record id="sequence_court_room" model="ir.sequence">
+            <field name="name">Court Room</field>
+            <field name="code">court.room</field>
+            <field name="prefix">CR/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Account Master -->
+        <record id="sequence_account_master" model="ir.sequence">
+            <field name="name">Account Master</field>
+            <field name="code">account.master</field>
+            <field name="prefix">AM/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <!-- Client Sequece -->
+        <record id="sequence_client" model="ir.sequence">
+            <field name="name">Client</field>
+            <field name="code">client.client</field>
+            <field name="prefix">C/%(year)s/</field>
+            <field name="padding">4</field>
+        </record>
+
+        <!-- Lawyer Sequece -->
+        <record id="sequence_lawyer" model="ir.sequence">
+            <field name="name">Lawyer</field>
+            <field name="code">lawyer.details</field>
+            <field name="prefix">L/%(year)s/</field>
+            <field name="padding">4</field>
+        </record>
+
+        <!-- Claimant/Plaintiff Lawyer Sequece -->
+        <record id="sequence_claimant_plaintiff_lawyer" model="ir.sequence">
+            <field name="name">Claimant/Plaintiff Lawyer</field>
+            <field name="code">opposition.lawyer</field>
+            <field name="prefix">CP/L/%(year)s/</field>
+            <field name="padding">4</field>
+        </record>
+
+        <!-- Judge Sequece -->
+        <record id="sequence_judge" model="ir.sequence">
+            <field name="name">Judge</field>
+            <field name="code">judge.details</field>
+            <field name="prefix">J/%(year)s/</field>
+            <field name="padding">4</field>
+        </record>
+
+        <!-- Witness Sequece -->
+        <record id="sequence_witness" model="ir.sequence">
+            <field name="name">Witness</field>
+            <field name="code">witness.details</field>
+            <field name="prefix">W/%(year)s/</field>
+            <field name="padding">4</field>
+        </record>
+
+        <!-- Accuse Sequece -->
+        <record id="sequence_accuse" model="ir.sequence">
+            <field name="name">Accuse</field>
+            <field name="code">accuse.details</field>
+            <field name="prefix">A/%(year)s/</field>
+            <field name="padding">4</field>
+        </record>
+
+        <!-- Registrar Sequece -->
+        <record id="sequence_registrar" model="ir.sequence">
+            <field name="name">Registrar</field>
+            <field name="code">registrar.details</field>
+            <field name="prefix">R/%(year)s/</field>
+            <field name="padding">4</field>
+        </record>
+
+        <!-- Court Admin Sequece -->
+        <record id="sequence_court_admin" model="ir.sequence">
+            <field name="name">Court Admin</field>
+            <field name="code">court.admin</field>
+            <field name="prefix">CA/%(year)s/</field>
+            <field name="padding">4</field>
+        </record>
+
+        <!-- Case Clerk Sequence -->
+        <record id="sequence_case_clerk" model="ir.sequence">
+            <field name="name">Case Clerk</field>
+            <field name="code">case.clerk</field>
+            <field name="prefix">CC/%(year)s/</field>
+            <field name="padding">4</field>
+        </record>
+
+        <!-- Secretary Sequence -->
+        <record id="sequence_secretary" model="ir.sequence">
+            <field name="name">Court Reporter</field>
+            <field name="code">secretary.details</field>
+            <field name="prefix">S/%(year)s/</field>
+            <field name="padding">4</field>
+        </record>
+
+         <record id="sequence_accuse_defendent" model="ir.sequence">
+            <field name="name">Accuse Defendent</field>
+            <field name="code">accuse.details.defendant</field>
+            <field name="prefix">D/%(year)s/</field>
+            <field name="padding">4</field>
+        </record>
+        
+
+        
+
+       
+    </data>
+</odoo>

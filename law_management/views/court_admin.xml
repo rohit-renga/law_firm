@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+		<!--Lawyer Details Start-->
+        <record id="view_court_admin_tree" model="ir.ui.view">
+          <field name="name">court.admin.tree</field>
+          <field name="model">court.admin</field>
+          <field name="arch" type="xml">
+                <tree string="Court Admin Details"  duplicate="false">
+                    <field name="court_admin_name"/>
+                    <field name="admin_mobile" invisible="1"/>
+                    <field name="admin_email"/>
+                    <field name="admin_gender" invisible="1"/>
+                    <field name="admin_dob" invisible="1"/>
+                    <field name="admin_age" invisible="1"/>
+                    <field name="admin_marital_status" invisible="1"/>
+                </tree>
+          </field>
+        </record>
+
+        <record id="view_court_admin_form" model="ir.ui.view">
+          <field name="name">court.admin.form</field>
+          <field name="model">court.admin</field>
+          <field name="arch" type="xml">
+              <form string="Court Admin Details"  duplicate="false">
+                <sheet>
+                  <!-- <div class="oe_button_box" name="button_box">
+                    <button name="toggle_active" type="object"
+                            class="oe_stat_button" icon="fa-archive">
+                        <field name="active" widget="boolean_button"
+                            options='{"terminology": "archive"}'/>
+                    </button>   
+                  </div> -->
+                    <field name="image" widget="image" class="oe_avatar" />
+                      <div class="oe_title">
+                          <h1>
+                            <field name="court_admin_id" readonly="1"/>
+                          </h1>
+                          <h1>
+                            <field name="court_admin_name" placeholder="Name" required="1"/>
+                          </h1>
+                      </div>
+                  <group>
+                      <group string="General Information">
+                        <field name="admin_email"/>
+                        <field name="court_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                      </group>
+                      <group string="Contact Information" invisible="1">
+                        <field name="admin_mobile"/>
+                        <field name="admin_gender"/>
+                        <field name="admin_dob"/>
+                        <field name="admin_age"/>
+                        <field name="admin_marital_status"/>
+                      </group>
+                  </group>
+                  <group invisible="1">
+                      <group string="Residential Address">
+                          <label for="street" string="Address"/>
+                          <div class="o_address_format">
+                              <field name="street" placeholder="Street..." class="o_address_street"/>
+                              <field name="street2" placeholder="Street 2..." class="o_address_street" />
+                              <field name="city_id" placeholder="City" class="o_address_city" style="width: 48%"/>
+                              <field name="village" placeholder="Village" class="o_address_city"/>
+                              <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open":True}' context="{'country_id': country_id,'zip': zip}" style="width: 48%"/>
+                              <field name="district_id" placeholder="District" style="width: 52%"/>
+                              <field name="zip" placeholder="ZIP" class="o_address_zip" style="width: 48%"/>
+                              <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open":True, "no_create": True}' />
+                          </div>
+                      </group>
+                      <group string="Postal Address">
+                          <label for="postal_street" string="Postal Address"/>
+                          <div class="o_address_format">
+                              <field name="postal_street" placeholder="Street..." class="o_address_street"/>
+                              <field name="postal_street2" placeholder="Street 2..." class="o_address_street" />
+                              <field name="postal_city_id" placeholder="City" class="o_address_city" style="width: 48%"/>
+                              <field name="postal_village" placeholder="Village" class="o_address_city"/>
+                              <field name="postal_state_id" class="o_address_state" placeholder="State" options='{"no_open":True}' context="{'country_id': postal_country_id,'zip': postal_zip}" style="width: 48%"/>
+                              <field name="district_id" placeholder="District" style="width: 52%"/>
+                              <field name="postal_zip" placeholder="ZIP" class="o_address_zip" style="width: 48%"/>
+                              <field name="postal_country_id" placeholder="Country" class="o_address_country" options='{"no_open":True, "no_create": True}' />
+                          </div>
+                      </group>
+                    </group>
+                      <notebook>
+                        <page string="court">
+                          <field name="admin_court_ids">
+                            <tree create="false">
+                              <field name="court_name"/>
+                              <field name="court_email"/>
+                            </tree>
+                          </field>
+                        </page>
+                        
+                      </notebook>
+                  </sheet>
+                  <div class="oe_chatter">
+                      <field name="message_follower_ids" widget="mail_followers"/>
+                      <field name="message_ids" widget="mail_thread"/>
+                  </div>
+              </form>
+          </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="court_admin_action">
+            <field name="name">Court Admin</field>
+            <field name="res_model">court.admin</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem id="menu_court_admin_details" name="Court Admin" parent="menu_master_data" sequence="11" action="court_admin_action"/>
+
+  </data>
+</odoo>

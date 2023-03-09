@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+	<!--Case Charges Start -->
+    <record id="view_case_charge_tree" model="ir.ui.view">
+      <field name="name">case.charge.tree</field>
+      <field name="model">case.charge</field>
+      <field name="arch" type="xml">
+            <tree string="Case Charges" duplicate="false">
+                <field name="case_name"/>
+                <field name="charges_case_name"/>
+                <field name="client_name"/>
+                <!-- <field name="client_ids" widget="many2many_tags" /> -->
+                <!-- <field name="accuse_ids" widget="many2many_tags" /> -->
+                <field name="number"/>
+                <field name="date"/>
+                <field name="amount"/>
+                <field name="desciption"/>
+            </tree>
+      </field>
+    </record>
+
+    <record id="view_case_charge_view" model="ir.ui.view">
+      <field name="name">case.charge.form</field>
+      <field name="model">case.charge</field>
+        <field name="arch" type="xml">
+            <form string="Case Charges" duplicate="false">
+                <sheet>
+                  	<group>
+	                    <group>
+	                      <field name="case_name" required="1" options="{'no_create': True,'no_create_edit': True}"/>
+                        <field name="client_ids" widget="many2many_tags" options="{'no_create': True,'no_create_edit': True}" invisible="1"/>
+                        <field name="accuse_ids" widget="many2many_tags" options="{'no_create': True,'no_create_edit': True}" invisible="1"/>
+                        <field name="client_name" options="{'no_create': True,'no_create_edit': True}"/>
+                        <field name="accuse_name" options="{'no_create': True,'no_create_edit': True}"/>
+                        <field name="number" options="{'no_create': True,'no_create_edit': True,'no_open': True}"/>
+                        <field name="laws_desc" string="Law Description"/>
+                      </group>
+                      <group>
+                        <field name="charges_case_name"/>
+                        <field name="date"/>
+                        <field name="amount"/>
+                        <field name="case_charges_created_by" options='{"no_open": True}'/>
+                      </group>
+                  	</group>
+                  	<div>
+	                    <separator string="Description"/>
+	                    <field name="desciption" nolabel="1" style="word-break:break-all;"/>
+               		</div>
+                </sheet>
+                <div class="oe_chatter">
+                      <field name="message_follower_ids" widget="mail_followers"/>
+                      <field name="message_ids" widget="mail_thread"/>
+                  </div>
+            </form>
+        </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="action_case_charge">
+          <field name="name">Case Charges</field>
+          <field name="res_model">case.charge</field>
+          <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_Charges_form" parent="menu_case_management_forms" action="action_case_charge" sequence="5"/>
+    <!-- Case Charges End -->
+  </data>
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+  	<template id="assets_backend" name="More Button" inherit_id="web.assets_backend">
+  		<xpath expr="//script[@src='/web/static/src/js/views/form/form_renderer.js']" position="replace">
+  			<script type="text/javascript" src="/law_management/static/src/js/form_renderer.js"></script>
+  		</xpath>
+  	</template>
+
+  	
+ </data>
+</odoo>

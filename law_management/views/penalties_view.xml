@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+		<!--Penalties Start-->
+	    <record id="penalties_form_tree" model="ir.ui.view">
+	      <field name="name">penalties.form.tree</field>
+	      <field name="model">penalties.form</field>
+	      <field name="arch" type="xml">
+	            <tree string="Penalties" duplicate="false">
+	            	<field name="penalties_name"/>
+	                <field name="client_name_id"/>
+	                <field name="case_id"/>
+	                <field name="penalties_case_name"/>
+	                <field name="receipt_number"/>
+	            </tree>
+	      </field>
+	    </record>
+
+	    <record id="penalties_form_view" model="ir.ui.view">
+	      <field name="name">penalties.form.form</field>
+	      <field name="model">penalties.form</field>
+	        <field name="arch" type="xml">
+	            <form string="Penalty Form" duplicate="false">
+	                <sheet>
+	                  <group>
+	                    <group>
+	                      <field name="penalties_name"/>
+	                      <field name="matter_id" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+	                      <field name="penalties_case_name"/>
+	                      <field name="case_id"/>
+	                      <field name="submitted_by"/>
+	                      <field name="client_name_id" attrs="{'invisible': [('submitted_by','!=','client')]}" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+	                      <field name="accuse_name_id" attrs="{'invisible': [('submitted_by','!=','accuse')]}" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+	                      <field name="lawyer_name_id" attrs="{'invisible': [('submitted_by','!=','lawyer')]}" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+	                      <field name="judge_name_id" attrs="{'invisible': [('submitted_by','!=','judge')]}" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+	                      <field name="receipt_number"/>
+	                      <field name="check_for_paid" widget="checkbox"/>
+	                    </group>
+	                    <group>
+	                      <field name="penalty_amount"/>
+	                      <field name="date"/>
+	                      <field name="date_of_payment"/>
+	                      <field name="reason_for_penalty"/>
+	                      <field name="penalty_created_by" options='{"no_open": True}'/>
+	                    </group>
+	                  </group>
+	                </sheet>
+	                <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+	            </form>
+	        </field>
+	    </record>
+
+
+	    <record model="ir.actions.act_window" id="window_penalties_form">
+	          <field name="name">Penalties</field>
+	          <field name="res_model">penalties.form</field>
+	          <field name="view_mode">tree,form</field>
+	    </record>
+
+	    <menuitem id="penalties_form_menu" parent="menu_case_management_forms"  action="window_penalties_form" sequence="10"/>
+	    <!--Penalties End -->
+
+  </data>
+</odoo>

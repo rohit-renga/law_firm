@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+        <!-- Client Details Form View -->
+
+        <record id="inherit_view_users_form" model="ir.ui.view">
+            <field name="name">res.users.inherit.form</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <field name="partner_id" position="before">
+                    <field name="user_type"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="inherit_view_users_tree" model="ir.ui.view">
+            <field name="name">res.users.inherit.tree</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_tree"/>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <field name="login" position="after">
+                    <field name="user_type"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_law_management_company_form" model="ir.ui.view">
+            <field name="name">res.law.company.form</field>
+            <field name="model">res.company</field>
+            <field name="priority">25</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Sequence">
+                        <group name="law_mgmt_seq">
+                            <group string="Client">
+                                <field name="client_seq"/>
+                            </group>
+                            <group string="Lawyer">
+                                <field name="lawyer_seq"/>
+                            </group>
+                            <group string="Claimant Plaintiff Lawyer">
+                                <field name="claimant_plaintiff_lawyer_seq"/>
+                            </group>
+                            <group string="Judge">
+                                <field name="judge_seq"/>
+                            </group>
+                            <group string="Witness">
+                                <field name="witness_seq"/>
+                            </group>
+                            <group string="Claimant Plaintiff">
+                                <field name="claimant_plaintiff_seq"/>
+                            </group>
+                            <group string="Court">
+                                <field name="court_seq"/>
+                            </group>
+                            <group string="Registrar">
+                                <field name="registrar_seq"/>
+                            </group>
+                            <group string="Court Admin">
+                                <field name="court_admin_seq"/>
+                            </group>
+                            <group string="Court Clerk">
+                                <field name="registry_clerk_seq"/>
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+  </data>
+</odoo>

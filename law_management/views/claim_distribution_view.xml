@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Claim Distribution Form & Tree View -->
+        <record id="view_claim_distribution_tree" model="ir.ui.view">
+            <field name="name">claim.distribution.tree</field>
+            <field name="model">claim.distribution</field>
+            <field name="arch" type="xml">
+                <tree string="Claim Distribution" duplicate="false">
+                    <field name="name"/>
+                    <field name="case_id"/>
+                    <field name="distribution_case_name" />
+                    <field name="claim_id"/>
+                    <field name="paid_amount"/>
+                    <field name="client_id"/>
+                    <field name="accuse_id"/>
+                    <field name="validity_date_amount"/>
+                    <field name="remain_amount_court"/>
+                    <field name="paid_amount_client"/>
+                    <field name="remain_amount_client"/>
+                    <field name="customer_amount" invisible='1'/>
+                    <field name="remain_customer_amount" invisible='1'/>
+                    <field name="court_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_claim_distribution_form" model="ir.ui.view">
+            <field name="name">claim.distribution.form</field>
+            <field name="model">claim.distribution</field>
+            <field name="arch" type="xml">
+                <form string="Claim Distribution" duplicate="false">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_claim_transaction" type="object" class="oe_stat_button" icon="fa-file">
+                                <field name="claim_trans_count" widget="statinfo" string="Claim Transaction"/>
+                            </button>
+
+                            <button name="action_payment_schedule" type="object" class="oe_stat_button" icon="fa-file">
+                                <field name="payment_schedule_count" widget="statinfo" string="Payment Schedule"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="claim_id" required='1' />
+                                <field name="paid_amount"/>
+                                <field name="validity_date_amount"/>
+                                <field name="remain_amount_court"/>
+                            </group>
+                            <group>
+                                <field name="case_id" />
+                                <field name="distribution_case_name" />
+                                <field name="client_id"/>
+                                <field name="accuse_id"/>
+                                <field name="paid_amount_client"/>
+                                <field name="remain_amount_client"/>
+                                <field name="court_id" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Claim Transaction">
+                                <field name="transaction_line" context="{'default_transaction_amount': paid_amount}" readonly="1">
+                                    <tree create="false">
+                                        <field name="name" string="Transaction ID"/>
+                                        <field name="transaction_date"/>
+                                        <field name="transaction_amount"/>
+                                        <field name="paid_to_whom"/>
+                                        <field name="paid_by"/>
+                                        <field name="debit_account_id"/>
+                                        <field name="credit_account_id"/>
+                                        <field name="payment_mode"/>
+                                        <field name="cheque_no"/>
+                                        <field name="bank_transaction_no"/>
+                                        <field name="receipt_no"/>
+                                        <field name="transaction_ref"/>
+                                        <field name="payment_schedule_id" string="Payment Milestone ID"/>
+                                        <!-- <field name="case_id"/>
+                                        <field name="claim_distribution_id"/>
+                                        <field name="client_id"/>
+                                        <field name="accuse_id"/>
+                                        <field name="attachments"/>-->
+                                    </tree>
+                                </field>
+                            </page>
+
+                            <page string="Payment Schedule">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <field name="payment_schedule_line">
+                                            <tree create="false">
+                                                <field name="name"/>
+                                                <field name="case_id"/>
+                                                <field name="claim_distribution_id"/>
+                                                <field name="description"/>
+                                                <field name="schedule_date"/>
+                                                <field name="paid_amount"/>
+                                                <field name="paid_by"/>
+                                                <field name="is_paid"/>
+                                            </tree>
+                                        </field>
+                                    </div>
+                                </div>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="claim_distribution_action">
+              <field name="name">Claims Distribution</field>
+              <field name="res_model">claim.distribution</field>
+              <field name="view_mode">tree,form</field>
+        </record>
+
+    <menuitem id="menu_claim_distribution" parent="menu_case_management_forms"  action="claim_distribution_action" sequence="7"/>
+    </data>
+</odoo>

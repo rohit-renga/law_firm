@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+		<record id="reference_evidence_form_view" model="ir.ui.view">
+			<field name="name">Our Choosable Evidence</field>
+			<field name="model">reference.evidence</field>
+			<field name="arch" type="xml">
+				<form string="Export Purchase Order">
+				<p class="oe_grey">
+				Are You sure to move these Evidence?
+				</p>			  
+					<footer>
+						<button string="Ok" class="btn-primary" type="object" name="transfer_salected_evidence" />
+						or
+						<button string="Cancel" class="btn-primary" type="object" name="cancel_salected_evidence"/>
+					</footer>
+				</form>						
+			</field>
+		</record>
+		<act_window id="action_reference_evidence" key2="client_action_multi"
+			name="Reference Evidence " res_model="reference.evidence" src_model="case.trail.evidance" target="inline"
+			view_mode="form"/>
+
+</odoo>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--Lawyer Email Notification Start-->
+        <record id="email_template_trail_notification_lawyer" model="mail.template">
+            <field name="name">Lawyer Trial</field>
+            <field name="model_id" ref="model_matter_matter"/>
+            <field name="email_from">${(user.email)|safe}</field>
+            <field name="email_to">${(object.assign_id.lawyer_emailW)}</field>
+            <field name="subject">Upcoming Trial Update</field>
+                <field name="body_html"><![CDATA[
+                <p>Respected Sir,</p><br></br>
+                <br></br>
+                Your client have trial as per below deatils on <strong> ${object.trial_date} </strong><br></br>
+                <br></br>
+                Client Name: 
+                % for client in object.client_name_many:
+                    <strong>${client.client_name}, </strong>
+                % endfor
+                <br></br>
+                Case no : <strong>${object.matter_seq}</strong><br></br>
+                <br></br>
+                Case name : <strong>${object.case_name}</strong><br></br>
+                <br></br>
+                Contact Details : <strong>Mobile : ${object.client_name.client_mobilP}, Mail : ${object.client_name.client_emailP}</strong><br></br>
+                <br></br>
+                Court Details : <strong>Court : ${object.court_id.court_name}, Mail : ${object.court_id.court_email},Contact No: ${object.court_id.court_number}</strong>
+                <br></br>
+
+
+                <br></br><br></br><br></br><br></br>
+                This is system generated mail.
+                ]]>
+            </field>
+        </record>
+        <!--Lawyer Email Notification End-->
+
+    </data>
+</odoo>

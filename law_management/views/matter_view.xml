@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+    <record id="view_matter_matter_tree" model="ir.ui.view">
+      <field name="name">matter.matter.tree</field>
+      <field name="model">matter.matter</field>
+      <field name="arch" type="xml">
+            <tree string="Case" duplicate="false">
+                <field name="matter_seq" string="Case Seq"/>
+                <field name="caseid"/>
+                <field name="case_name"/>
+                <field name="type"/>
+                <field name="category_id"/>
+                <field name="client_name" invisible="1"/>
+                <field name="client_name_many" widget="many2many_tags"/>
+                <field name="accused" invisible="1"/>
+                <field name="accuse_ids" widget="many2many_tags"/>
+                <field name="assign_id"/>
+                <field name="case_result"/>
+                <field name="opp_lawyer_id"/>
+                <field name="judge_id"/>
+            </tree>
+      </field>
+    </record>
+
+    <record id="view_matter_matter_form" model="ir.ui.view">
+      <field name="name">matter.matter.form</field>
+      <field name="model">matter.matter</field>
+        <field name="arch" type="xml">
+            <form string="Case" duplicate="false">
+                  <header>
+                    <button name="create_invoice_matter" type="object" string="Create Invoice" class="oe_highlight" invisible="1"/>
+                    <field name="stage_id" widget="statusbar" clickable="1"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="matter_seq" readonly="1"/>
+                        </h1>
+                    </div>
+                    <!-- Smart Button Start-->
+                    <div class="oe_button_box" name="button_box">
+                        <button name="task_action" type="object" class="oe_stat_button" icon="fa-tasks" help="Evidence related to the matter">
+                         <field string="Tasks" name="tasks_count" widget="statinfo"/>
+                        </button>
+                        <button name="expense_action" type="object" class="oe_stat_button" icon="fa-money">
+                            <field string="Expense" name="expense_count" widget="statinfo"/>
+                        </button>
+                        <button name="claim_action" type="object" class="oe_stat_button" icon="fa-gavel" help="Trials related to the matter">
+                            <field string="Claims" name="claims_count" widget="statinfo"/>
+                        </button>
+                        <button name="case_trails_action" type="object" class="oe_stat_button" icon="fa-gavel" help="Case Trail...">
+                            <field string="Trials" name="trails_count" widget="statinfo"/>
+                        </button>
+                        <button name="case_charges_action" type="object" class="oe_stat_button" icon="fa fa-cc-mastercard" help="Case Charges...">
+                            <field string="Case Charges" name="charges_count" widget="statinfo"/>
+                        </button>
+                        <button name="case_penalties_action" type="object" class="oe_stat_button" icon="fa-gavel" help="Case Penalties &amp;.It's Amount..">
+                            <field string="Penalties" name="penalties_count" widget="statinfo"/>
+                        </button>
+                        <button name="court_fee_action" type="object" class="oe_stat_button" icon="fa-money" help="Court Changes">
+                            <field string="Court Fees" name="court_fees_count" widget="statinfo"/>
+                        </button>
+                        <button name="observations_count_action" type="object" class="oe_stat_button" icon="fa-gavel" help="Disciplinary Observations for Case....">
+                            <field string="Disciplinary Observations" name="observations_count" widget="statinfo"/>
+                        </button>
+                        <button name="case_documents_action" type="object" class="oe_stat_button" icon="fa-file-text" help="Case Documents....">
+                            <field string="Documents" name="m_doc_count" widget="statinfo"/>
+                        </button> 
+                    </div>
+                      <!-- Smart Button End-->
+                    <group>
+                        <group string="Case Details">
+                            <field name="caseid"/>
+                            <field name="file_number"/>
+                            <field name="case_name"/>
+                            <field name="cause_name"/>
+                            <field name="type"/>
+                            <field name="category_id" required="1" domain="[('type','=',type)]" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                            <field name="client_name" options="{'no_open': True}" invisible="1"/>
+                            <field name="client_name_many" widget="many2many_tags" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                            <field name="accused" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' invisible="1"/>
+                            <field name="accuse_ids" widget="many2many_tags"/>
+                            <field name="assign_id" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' domain="[('state_id', '=', matter_state_id)]"/>
+                            <field name="opp_lawyer_id" ooptions='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                            <field name="judge_id" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                            <field name="file_owner"/>
+                            <field name="file_lawyer" options="{'no_create': True,'no_open': True}" attrs="{'invisible': [('file_owner','!=','lawyer')]}"/>
+                            <field name="file_opposition_lawyer" options="{'no_create': True,'no_open': True}" attrs="{'invisible': [('file_owner','!=','opposition')]}"/>
+                            <field name="file_client" options="{'no_create': True,'no_open': True}" attrs="{'invisible': [('file_owner','!=','client')]}"/>
+                            <field name="file_accuse" options="{'no_create': True,'no_open': True}" attrs="{'invisible': [('file_owner','!=','accuse')]}"/>
+                            <field name="file_judge" options="{'no_create': True,'no_open': True}" attrs="{'invisible': [('file_owner','!=','judge')]}"/>
+                            <field name="file_witness" options="{'no_create': True,'no_open': True}" attrs="{'invisible': [('file_owner','!=','witness')]}"/>
+
+                            <field name="accused_defendent" options="{'no_create': True,'no_open': True}" />
+                            
+                            <!-- <field name="pay_type"/> -->
+                        </group>
+                        <group string="Important Dates">
+                            <field name="date"/>
+                            <field name="date_open" required="1"/>
+                            <field name="trial_date"/>
+                            <field name="notify_trial_date" invisible="1"/>
+                            <field name="notify_trial_date_week" invisible="1"/>
+                            <field name="date_close"/>
+                            <field name="reopen_date"/>
+                            <field name="matter_state_id"/>
+                            <field name="priority" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                            <field name="court_category" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                            <field name="court_id" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                            <field name="user" options='{"no_open": True}'/>
+                            <field name="case_result"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="case_description" string="Description">
+                            <field name="description"/>
+                            <!-- <field name="description_text" invisible="1"/> -->
+                        </page>
+                        <page name="case_history" string="History" invisible="1">
+                            <field name="case_history_ids" readonly="1">
+                                <tree>
+                                    <field name="date"/>
+                                    <field name="user"/>
+                                    <field name="stage_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="case_task" string="Task">
+                            <field name="case_task_ids">
+                                <tree create="false">
+                                    <field name="name"/>
+                                    <field name="date_deadline"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="case_expense" string="Expense">
+                            <field name="expense_ids" readonly="1">
+                                <tree editable="top">
+                                    <field name="date"/>
+                                    <field name="name"/>
+                                    <field name="total_amount"/>
+                                    <field name="state"/>
+                                    <!-- <field name="description" string="Note"/> -->
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="case_cliams" string="Claims">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <field name="claim_ids" domain="[('case_id', '=', active_id)]">
+                                        <tree create="false">
+                                            <field name="description"/>
+                                            <field name="claim_amount"/>
+                                            <field name="paid_amount"/>
+                                            <field name="remainig_claim_amount_count"/>
+                                        </tree>
+                                    </field>
+                                </div>
+                            </div>
+                        </page>
+                            <page name="case_court_fees" string="Court Fees">
+                                <field name="court_fees_ids" domain="[('matter_id', '=', active_id)]">
+                                    <tree create="false">
+                                        <field name="client_name"/>
+                                        <field name="accuse_name"/>
+                                        <field name="court_name"/>
+                                        <field name="amount"/>
+                                        <field name="date"/>
+                                        <field name="payment_date"/>
+                                        <field name="rec_no"/>
+                                        <field name="is_paid"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="case_penalties" string="Penalties">
+                                <field name="case_penalties_ids" domain="[('matter_id', '=', active_id)]">
+                                    <tree create="false">
+                                        <field name="penalties_name"/>
+                                        <field name="client_name_id"/>
+                                        <field name="accuse_name_id"/>
+                                        <field name="receipt_number"/>
+                                        <field name="penalty_amount"/>
+                                        <field name="check_for_paid"/>
+                                        <field name="date"/>
+                                        <field name="date_of_payment"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="case_trail" string="Trial">
+                                <field name="case_trail_ids" domain="[('matter_name', '=', active_id)]">
+                                    <tree create="false">
+                                        <field name="trail_name" string="Trial name"/>
+                                        <field name="trail_date" string="Trial date"/>
+                                        <field name="client_name"/>
+                                        <field name="court_name"/>
+                                        <field name="lawyer_name"/>
+                                        <field name="opposition_lawyer_name"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="case_charges" string="Case Charges">
+                                <field name="case_charges_ids" domain="[('case_name', '=', active_id)]">
+                                    <tree create="false">
+                                        <field name="client_name"/>
+                                        <field name="number"/>
+                                        <field name="date"/>
+                                        <field name="amount"/>
+                                        <field name="desciption"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="case_do" string="Disciplinary observations">
+                                <field name="case_do_ids" domain="[('case_do_id', '=', active_id)]">
+                                    <tree create="false">
+                                        <field name="do_name"/>
+                                        <field name="do_date"/>
+                                        <field name="do_desc"/>
+                                        <field name="client_id"/>
+                                        <field name="accuse_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                          <page string="Documents">
+                            <field name="case_documents_ids" domain="[('matter_document_id','=',active_id)]" readonly="1">
+                                  <tree>
+                                    <field name="mat_doc_name"/>
+                                    <field name="mat_doc_id" widget="many2many_binary"/>
+                                    <field name="mat_date"/>
+                                    <field name="mat_comment"/>
+                                    <field name="mat_created_by"/>
+                                  </tree>
+                            </field>
+                          </page>
+                          <page string="Judgement">
+                            <field name="case_judgement_ids">
+                                <tree create="false">
+                                    <field name="accused"/>
+                                    <field name="trail_judgement_id"/>
+                                    <field name="judgement_date"/>
+                                    <field name="judgement_description"/>
+                                </tree>
+                            </field>
+                          </page>
+                          <page string="Claim Transaction">
+                            <field name="claim_transation_ids">
+                              <tree create = "false">
+                                <field name="name"/>
+                                <field name="transaction_date"/>
+                                <field name="transaction_amount"/>
+                                <field name="paid_to_whom"/>
+                                <field name="paid_by"/>
+                                <field name="debit_account_id"/>
+                                <field name="credit_account_id"/>
+                                <field name="payment_mode"/>
+                                <field name="cheque_no"/>
+                                <field name="bank_transaction_no"/>
+                                <field name="receipt_no"/>
+                                <field name="t_court_id"/>
+                              </tree>
+                            </field>
+                          </page>
+                          <page string="Payment Schedule">
+                            <field name="payment_schedule_ids">
+                              <tree create="false">
+                                <field name="name"/>
+                                <field name="claim_distribution_id"/>
+                                <field name="description"/>
+                                <field name="schedule_date"/>
+                                <field name="paid_amount"/>
+                                <field name="paid_by"/>
+                                <field name="is_paid"/>
+                                <field name="court_id"/>
+                              </tree>
+                            </field>
+                          </page>
+
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+        <record model="ir.ui.view" id="view_matter_kanban">
+            <field name="name">matter.view.kanban</field>
+            <field name="model">matter.matter</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban quick_create="false">
+                    <field name="matter_seq"/>
+                    <field name="caseid"/>
+                    <field name="case_name"/>
+                    <field name="client_name_many"/>
+                    <field name="accuse_ids"/>
+                    <field name="assign_id"/>
+                    <field name="opp_lawyer_id"/>
+                    <field name="judge_id"/>
+                    <field name="court_id"/>
+                    <field name="type"/>
+                    <field name="category_id"/>
+                    <field name="case_result"/>
+                    <field name="color"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_color_{{kanban_getcolor(record.color.raw_value)}}
+                                              oe_kanban_global_click_edit oe_semantic_html_override
+                                              oe_kanban_card {{record.group_fancy==1 ? 'oe_kanban_card_fancy' : ''}}">
+                            <div class="oe_kanban_details">
+                                    <h3><field name="matter_seq"/></h3>
+                                    <div t-if="record.caseid.raw_value"><strong>Case Id: </strong><field name="caseid"/></div>
+                                    <div t-if="record.case_name.raw_value"><strong>Case Name: </strong><field name="case_name"/></div>
+                                    <div t-if="record.client_name_many.raw_value"><strong>Client Name: </strong><field name="client_name_many" widget="many2many_tags"/></div>
+                                    <div t-if="record.accuse_ids.raw_value"><strong>Accuse: </strong><field name="accuse_ids" widget="many2many_tags"/></div>
+                                    <div t-if="record.assign_id.raw_value"><strong>Lawyer: </strong><field name="assign_id"/></div>
+                                    <div t-if="record.opp_lawyer_id.raw_value"><strong>Defendant/Plaintiff Lawyer: </strong><field name="opp_lawyer_id"/></div>
+                                    <div t-if="record.judge_id.raw_value"><strong>Judge: </strong><field name="judge_id"/></div>
+                                    <div t-if="record.court_id.raw_value"><strong>Court: </strong><field name="court_id"/></div>
+                                    <div t-if="record.type.raw_value"><strong>Type: </strong><field name="type"/></div>
+                                    <div t-if="record.category_id.raw_value"><strong>Sub Category: </strong><field name="category_id"/></div>
+                                    <div t-if="record.case_result.raw_value"><strong>Case Result: </strong><field name="case_result"/></div>
+                            </div>
+                        </div>
+                        </t>
+                    </templates>
+                </kanban>
+           </field>
+        </record>
+        <!--kanban view of case-->
+        
+                <!--Calendar View Start-->
+      <record id="calendar_matter_view" model="ir.ui.view">
+            <field name="name">matter.matter.calendar</field>
+            <field name="model">matter.matter</field>
+            <field name="arch" type="xml">
+                <calendar color="date_open" date_start="date_open" date_stop='trial_date' string="Case" mode="month">
+                    <field name="matter_seq"/>
+                    <field name="caseid"/>
+                    <field name="case_name"/>
+                    <field name="client_name_many"/>
+                    <field name="accuse_ids"/>
+                    <field name="assign_id"/>
+                    <field name="opp_lawyer_id"/>
+                    <field name="judge_id"/>
+                    <field name="court_id"/>
+                    <field name="type"/>
+                    <field name="category_id"/>
+                    <field name="case_result"/>
+                    <field name="date_open"/>
+                    <field name="trial_date"/>
+                </calendar>
+            </field>
+        </record>
+        <!--Calendar View End-->
+
+        <!--Graph View Start-->
+        <record model="ir.ui.view" id="graph_matter_view">
+            <field name="name">matter.matter.graph</field>
+            <field name="model">matter.matter</field>
+            <field name="arch" type="xml">
+                <graph string="Case" type="bar">
+                    <field name="type" type="col"/>
+                    <field name="stage_id" type="col"/>
+                    <field name="case_result" type="row"/>
+                    <field name="category_id" type="row"/>
+                </graph>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="graph_matter_view1">
+            <field name="name">matter.matter1.graph</field>
+            <field name="model">matter.matter</field>
+            <field name="arch" type="xml">
+                <graph string="Case Type" type="pie">
+                    <field name="type" type="row"/>
+                </graph>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="graph_matter_view2">
+            <field name="name">matter.matter2.graph</field>
+            <field name="model">matter.matter</field>
+            <field name="arch" type="xml">
+                <graph string="Case Result" type="pie">
+                    <field name="case_result" type="row"/>
+                </graph>
+            </field>
+        </record>
+        <!--Graph View End-->
+
+        <!--Pivot View Start-->
+        <record id="pivot_matter_view" model="ir.ui.view">
+            <field name="name">matter.matter.pivot</field>
+            <field name="model">matter.matter</field>
+            <field name="arch" type="xml">
+                <pivot string="Case Analysis" disable_linking="True">
+                    <field name="type" type="col"/>
+                    <field name="case_result" type="row"/>
+                    <field name="category_id" type="row"/>
+                </pivot>
+            </field>
+        </record>
+        <!--Pivot View End-->
+
+        
+        <!--Gantt View Start-->
+        <record id="gantt_matter_view" model="ir.ui.view">
+            <field name="name">matter.matter.gantt</field>
+            <field name="model">matter.matter</field>
+            <field name="arch" type="xml">
+                <gantt date_stop="trial_date" date_start="date" string="Case" default_group_by="type">
+                </gantt>
+            </field>
+        </record>
+        <!--Gantt View End-->         
+
+       
+		<record model="ir.actions.act_window" id="matter_matter_action">
+			<field name="name">Case</field>
+			<field name="res_model">matter.matter</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form,kanban,graph,calendar,pivot,gantt</field>
+            <field name="domain">[]</field>
+			<field name="view_id" ref="view_matter_matter_tree"/>
+		</record>
+
+        <menuitem id="menu_matter_matter_action" parent="menu_case_management_forms"  action="matter_matter_action" sequence="1"/>
+
+        <!--Matter Document View Start-->
+        <record id="view_matter_document_tree" model="ir.ui.view">
+            <field name="name">matter.document.tree</field>
+            <field name="model">matter.document</field>
+            <field name="arch" type="xml">
+                <tree string="Case Document" delete="0" duplicate="false">
+                        <field name="mat_doc_name"/>
+                        <field name="mat_doc_id" widget="many2many_binary"/>
+                        <field name="mat_comment"/>
+                        <field name="mat_date"/>
+                        <field name="mat_created_by"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_matter_document_form" model="ir.ui.view">
+            <field name="name">matter.document.form</field>
+            <field name="model">matter.document</field>
+            <field name="arch" type="xml">
+                <form string="Case Document" delete="0" duplicate="false">
+                    <sheet>
+                            <group>
+                                <group>
+                                    <field name="mat_doc_name"/>
+                                    <field name="document_case_name"/>
+                                    <field name="matter_document_id"/>
+                                    <field name="mat_doc_id" widget="many2many_binary"/>
+                                </group>
+                                <group>
+                                    <field name="mat_date"/>
+                                    <field name="mat_comment"/>
+                                    <field name="mat_created_by" options='{"no_open": True}'/>
+                                </group>
+                            </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="matter_document_action">
+            <field name="name">Case Document</field>
+            <field name="res_model">matter.document</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+       <!--  <menuitem id="menu_matter_document" name="Case Document" parent="menu_documents_forms" sequence="1" action="matter_document_action"/> -->
+
+    </data>
+</odoo>

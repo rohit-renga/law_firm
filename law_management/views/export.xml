@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <xpath expr="//link[@href='/web/static/src/css/data_export.css']" position="replace">
+	        <link rel="stylesheet" href="/web/static/src/css/data_export.css" groups="group_export_data" />
+	    </xpath>
+        <xpath expr="//script[@src='/web/static/src/js/data_export.js']" position="replace">
+            <script type="text/javascript" src="/web/static/src/js/data_export.js" groups="group_export_data"></script>
+    </xpath>
+
+
+    
+
+</odoo>

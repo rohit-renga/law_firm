@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- <record id="indiemdi_edit_project" model="ir.ui.view">
+            <field name="name">indimedi.project.project.form.inherit</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+            	   <field name="case_id"/>
+                </field>
+            </field>
+        </record> -->
+
+        <record id="indimedi_project_task_form_view_inherit" model="ir.ui.view">
+            <field name="name">indimedi.project.task.form</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2" />
+            <field name="arch" type="xml">
+                <field name="project_id" position="attributes">
+                    <attribute name="string">Case Number</attribute>
+                </field>
+                <field name="project_id" position="after">
+                    <field name="start_date"/>
+                    <field name="case_id" invisible="1"/>
+                </field>
+                <field name="user_id" position="replace">
+                    <field name="user_id" invisible="1"/>
+                    <field name="assign_to" string="Assigned to"/>
+                    <field name="lawyer" options="{'no_create': True}" attrs="{'invisible': [('assign_to','!=','lawyer')]}"/>
+                    <field name="judge" options="{'no_create': True}" attrs="{'invisible': [('assign_to','!=','judge')]}"/>
+                    <field name="court_admin" options="{'no_create': True}" attrs="{'invisible': [('assign_to','!=','court_admin')]}"/>
+                    <field name="registry_clerk" options="{'no_create': True}" attrs="{'invisible': [('assign_to','!=','registry_clerk')]}"/>
+                </field>
+
+            </field>
+        </record>
+
+    
+
+    </data>
+</odoo>

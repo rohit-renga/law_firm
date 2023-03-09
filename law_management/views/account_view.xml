@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+	<!-- account start-->
+    <record id="view_account_tree" model="ir.ui.view">
+      <field name="name">account.master.tree</field>
+      <field name="model">account.master</field>
+      <field name="arch" type="xml">
+            <tree string="Account" duplicate="false">
+                <field name="account_seq_id"/>
+                <field name="account_holder"/>
+                <field name="account_holder_name"/>
+                <field name="account_number"/>
+                <field name="bank"/>
+                <field name="account_type"/>
+                <field name="bank"/>
+                <field name="IFSC_code"/>
+                <field name="SWIFT_code"/>
+            </tree>
+      </field>
+    </record>
+
+    <record id="view_account_form" model="ir.ui.view">
+      <field name="name">account.master.form</field>
+      <field name="model">account.master</field>
+        <field name="arch" type="xml">
+            <form string="Account" duplicate="false">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                          <field name="account_seq_id" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="account_number" required="True"/>
+                            <field name="account_holder" required="True"/>
+                            <field name="client_account" attrs="{'invisible': [('account_holder','!=','client')]}" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                            <field name="lawyer_account" attrs="{'invisible': [('account_holder','!=','lawyer')]}" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                            <field name="opp_lawyer_account" attrs="{'invisible': [('account_holder','!=','opp_lawyer')]}" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                            <field name="accuse_account" attrs="{'invisible': [('account_holder','!=','accuse')]}" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                            <field name="court_id" attrs="{'invisible': [('account_holder','!=','court')]}" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                            <field name="account_type"/>
+                        </group>
+                        <group>
+                            <field name="bank" required="True"/>
+                            <field name="IFSC_code"/>
+                            <field name="SWIFT_code"/>
+                            <field name="date"/>
+                            <field name="account_created_by" options='{"no_open": True}'/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_account_master_search" model="ir.ui.view">
+      <field name="name">account.master.search</field>
+      <field name="model">account.master</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="account_number"/>
+                <field name="account_holder"/>
+                <field name="bank"/>
+                <field name="IFSC_code"/>
+                <field name="SWIFT_code"/>
+                <field name="date"/>
+                <field name="account_created_by"/>
+                <filter name="number" domain="[]" string="Account No." context="{'group_by':'account_number'}"/>
+                <filter name="holder" domain="[]" string="Account Holder" context="{'group_by':'account_holder'}"/>
+                <filter name="bank" domain="[]" string="Bank" context="{'group_by':'bank'}"/>
+                <filter name="ifsc" domain="[]" string="IFSC Code" context="{'group_by':'IFSC_code'}"/>
+                <filter name="swift" domain="[]" string="SWIFT COde" context="{'group_by':'SWIFT_code'}"/>
+                <filter name="date" domain="[]" string="Date" context="{'group_by':'date'}"/>
+                <filter name="created" domain="[]" string="Created By" context="{'group_by':'account_created_by'}"/>
+            </search>
+        </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="account_action">
+          <field name="name">Account</field>
+          <field name="res_model">account.master</field>
+          <field name="view_mode">tree,form</field>
+          <field name="search_view_id" ref="view_account_master_search"/>
+          <field name="domain">[]</field>
+          <field name="context">{'search_default_holder': 1}</field>
+    </record>
+
+    <menuitem id="menu_account_action" parent="menu_general_data"  action="account_action" sequence="1"/>
+    <!-- account start-->
+
+    <!-- account type -->
+    <record id="view_account_type_tree" model="ir.ui.view">
+      <field name="name">account.type.tree</field>
+      <field name="model">account.type</field>
+      <field name="arch" type="xml">
+            <tree string="Account Type" duplicate="false">
+                <field name="name"/>
+            </tree>
+      </field>
+    </record>
+
+    <record id="view_account_type_form" model="ir.ui.view">
+      <field name="name">account.type.form</field>
+      <field name="model">account.type</field>
+        <field name="arch" type="xml">
+            <form string="Account" duplicate="false">
+                <sheet>
+                    <group>
+                      <group>
+                        <field name="name"/>
+                      </group>
+                      <group>
+                        <field name="date"/>
+                        <field name="account_type_created_by" options='{"no_open": True}'/>
+                      </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_account_type_search" model="ir.ui.view">
+      <field name="name">account.type.search</field>
+      <field name="model">account.type</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <filter name="type" domain="[]" string="Account Type" context="{'group_by':'name'}"/>
+            </search>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="account_type_action">
+          <field name="name">Account Type</field>
+          <field name="res_model">account.type</field>
+          <field name="view_mode">tree,form</field>
+          <field name="search_view_id" ref="view_account_type_search"/>
+          <field name="domain">[]</field>
+          <field name="context">{'search_default_type': 1}</field>
+    </record>
+
+    <menuitem id="menu_account_type_action" parent="menu_general_data" action="account_type_action" sequence="2"/>
+    <!-- account type -->
+
+
+  </data>
+</odoo>

@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+	<!--Accuse Details Start-->
+    <record id="view_accuse_details_tree" model="ir.ui.view">
+        <field name="name">accuse.details.tree</field>
+        <field name="model">accuse.details</field>
+        <field name="arch" type="xml">
+              <tree string="Plantiff Details" duplicate="false">
+                  <field name="accuse_name"/>
+              </tree>
+        </field>
+      </record>
+
+      <record id="view_accuse_details_form" model="ir.ui.view">
+        <field name="name">accuse.details.form</field>
+        <field name="model">accuse.details</field>
+        <field name="arch" type="xml">
+            <form string="Plantiff Details" duplicate="false">
+              <sheet>
+                <div class="oe_button_box" name="button_box">
+                  <button name="action_accuse_account_view" type="object" class="oe_stat_button" icon="fa-money">
+                    <field string="Account" name="account" widget="statinfo"/>
+                  </button>
+                  <button name="action_accuse_document" type="object" class="oe_stat_button" icon="fa-pencil-square-o">
+                        <field string="Documents" name="a_doc_count" widget="statinfo"/>
+                    </button>
+                </div>
+                <field name="image" widget="image" class="oe_avatar" />
+                  <div class="oe_title">
+                      <h1>
+                          <field name="accuse_id" readonly="1" />
+                      </h1>
+                      <h1>
+                        <field name="accuse_name" placeholder="Name" required="1"/>
+                      </h1>
+                  </div>
+                  <group string="General Information">
+                      <group>
+                        <field name="accuse_type" required="1"/>
+                        <field name="company_registration_no" attrs="{'required': [('accuse_type','=','organisation')], 'invisible': ['|',('accuse_type','=','individual'),('accuse_type','=',False)]}"/>
+                        <field name="accuse_nationality" attrs="{'invisible': ['|',('accuse_type','=','organisation'),('accuse_type','=',False)],'required':[('accuse_type','=','individual')]}" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                        <field name="accuse_nationality_code" attrs="{'invisible': ['|',('accuse_type','=','organisation'),('accuse_type','=',False)]}" readonly="1"/>
+                      </group>
+                      <group string="create By">
+                        <field name="accuse_created_by" options='{"no_open": True}'/>
+                      </group>
+                  </group>
+                  <group attrs="{'invisible': [('accuse_type','=','organisation')]}">
+                    <group string="Physical Address">
+                        <label for="street" string="Address"/>
+                        <div class="o_address_format">
+                            <field name="street" placeholder="Street..." class="o_address_street"/>
+                            <field name="street2" placeholder="Street 2..." class="o_address_street" />
+                            <field name="city_id" placeholder="City" class="o_address_city" style="width: 48%"/>
+                            <field name="village" placeholder="Village" class="o_address_city"/>
+                            <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open":True}' context="{'country_id': country_id,'zip': zip}" style="width: 48%"/>
+                            <field name="zip" placeholder="ZIP" class="o_address_zip" style="width: 48%"/>
+                            <field name="district_id" placeholder="District" style="width: 52%"/>
+                            <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open":True, "no_create": True}' />
+                        </div>
+                    </group>
+                    <group string="Postal Address">
+                        <label for="postal_street" string="Postal Address"/>
+                        <div class="o_address_format">
+                            <field name="postal_street" placeholder="Street..." class="o_address_street"/>
+                            <field name="postal_street2" placeholder="Street 2..." class="o_address_street" />
+                            <field name="postal_city_id" placeholder="City" class="o_address_city" style="width: 48%"/>
+                            <field name="postal_village" placeholder="Village" class="o_address_city"/>
+                            <field name="postal_state_id" class="o_address_state" placeholder="State" options='{"no_open":True}' context="{'country_id': postal_country_id,'zip': postal_zip}" style="width: 48%"/>
+                            <field name="postal_zip" placeholder="ZIP" class="o_address_zip" style="width: 48%"/>
+                            <field name="district_id" placeholder="District" style="width: 52%"/>
+                            <field name="postal_country_id" placeholder="Country" class="o_address_country" options='{"no_open":True, "no_create": True}' />
+                        </div>
+                    </group>
+                </group>
+                  <notebook>
+                    <page string="Account">
+                      <field name="account_details_ids" domain="[('accuse_account','=',active_id)]" readonly="1">
+                        <tree>
+                          <field name="account_number"/>
+                          <field name="accuse_account"/>
+                          <field name="bank"/>
+                          <field name="account_type"/>
+                        </tree>
+                      </field>
+                    </page>
+                      <page string="Documents">
+                        <field name="accuse_document_ids" domain="[('accuse_document_id','=',active_id)]" readonly="1">
+                            <tree>
+                              <field name="doc_name"/>
+                              <field name="doc_id" widget="many2many_binary"/>
+                              <field name="date"/>
+                              <field name="comment"/>
+                              <field name="ad_created_by"/>
+                            </tree>
+                          </field>
+                      </page>
+                    <page string="Cases">
+                      <field name="all_case_ids">
+                        <tree create="false">
+                          <field name="case_name"/>
+                          <field name="category_id"/>
+                          <field name="assign_id"/>
+                          <field name="accused"/>
+                          <field name="case_result"/>
+                          <field name="opp_lawyer_id"/>
+                          <field name="judge_id"/>
+                        </tree>
+                      </field>
+                    </page>
+                  </notebook>
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+      </record>
+
+      <record id="view_accuse_details_kanban" model="ir.ui.view">
+        <field name="name">accuse.details.kanban</field>
+        <field name="model">accuse.details</field>
+        <field name="arch" type="xml">
+            <kanban class="o_hr_employee_kanban">
+                  <field name="id"/>
+                  <field name="image"/>
+                  <field name="accuse_name"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_res_partner_kanban">
+                            <div class="o_kanban_image">
+                              <img t-att-src="kanban_image('accuse.details', 'image', record.id.raw_value)"/>
+                          </div>
+                            <div class="oe_kanban_details">
+                                <div class="o_kanban_tags_section oe_kanban_partner_categories"/>
+                                <ul>
+                                    <li t-if="record.accuse_name.raw_value"><field name="accuse_name"/></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+      </record>
+
+    <record id="view_accuse_search" model="ir.ui.view">
+      <field name="name">accuse.details.search</field>
+      <field name="model">accuse.details</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="accuse_name"/>
+                <filter name="fil_name" domain="[]" string="Name" context="{'group_by':'accuse_name'}"/>
+            </search>
+        </field>
+    </record>
+
+      <record model="ir.actions.act_window" id="accuse_details_action">
+          <field name="name">Plantiff</field>
+          <field name="res_model">accuse.details</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,form,kanban</field>
+          <field name="search_view_id" ref="view_accuse_search"/>
+          <field name="domain">[]</field>
+          <field name="context">{}</field>
+      </record>
+
+   
+      <menuitem id="menu_accuse_details" name="Plantiff" parent="menu_master_data" sequence="8" action="accuse_details_action"/>
+      <!--Accuse Details End-->
+
+        <!--Accuse Document View Start-->
+        <record id="view_accuse_document_tree" model="ir.ui.view">
+          <field name="name">accuse.document.tree</field>
+          <field name="model">accuse.document</field>
+          <field name="arch" type="xml">
+                <tree string="defendant / Plaintiff Document" delete="0" duplicate="false">
+                    <field name="doc_name"/>
+                    <field name="doc_id" widget="many2many_binary"/>
+                    <field name="comment"/>
+                    <field name="date"/>
+                    <field name="ad_created_by"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_accuse_document_form" model="ir.ui.view">
+          <field name="name">accuse.document.form</field>
+          <field name="model">accuse.document</field>
+          <field name="arch" type="xml">
+              <form string="Plantiff Document" delete="0" duplicate="false">
+                <sheet>
+                    <group>
+                      <group>
+                        <field name="accuse_document_id" required="1" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                        <field name="doc_name"/>
+                        <field name="doc_no"/>
+                        <field name="doc_id" widget="many2many_binary"/>
+                      </group>
+                      <group>
+                        <field name="date"/>
+                        <field name="comment"/>
+                        <field name="ad_created_by" options='{"no_open": True}'/>
+                      </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                      <field name="message_follower_ids" widget="mail_followers"/>
+                      <field name="message_ids" widget="mail_thread"/>
+                  </div>
+              </form>
+          </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="accuse_document_action">
+            <field name="name">Plantiff Document</field>
+            <field name="res_model">accuse.document</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <!-- <menuitem id="menu_accuse_document" name="Accuse" parent="menu_documents_forms" sequence="6" action="accuse_document_action"/> -->
+        <!--Lawyer Document View End-->
+
+  </data>
+</odoo>

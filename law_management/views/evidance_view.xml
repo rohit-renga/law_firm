@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+  	<!--Evidance View Start-->
+    <record id="view_case_trail_evidance_tree" model="ir.ui.view">
+      <field name="name">case.trail.evidance.tree</field>
+      <field name="model">case.trail.evidance</field>
+      <field name="arch" type="xml">
+        	<tree string="Case Evidence"  duplicate="false">
+              <field name="evidance_case"/>
+              <field name="evidance_name"/>
+              <field name="evidence_case_name"/>
+              <field name="trail_evidance_id"/>
+              <field name="evidance_lawyer"/>
+              <field name="evidance_opposition_lawyer"/>
+              <field name="admissible_evidance"/>
+              <field name="evidance_description"/>
+        	</tree>
+      </field>
+    </record>
+
+    <record id="view_case_trail_evidance_form" model="ir.ui.view">
+      <field name="name">case.trail.evidance.form</field>
+      <field name="model">case.trail.evidance</field>
+        <field name="arch" type="xml">
+            <form string="Evidence"  duplicate="false">
+            	<sheet>
+                    <div class="oe_right oe_button_box" name="button_box" position="inside">
+                      <button name="case_evidence_document_defendant" type="object" class="oe_stat_button" icon="fa-file" help="Evidence">
+                         <field string="defendant" name="evidence_count_defendant" widget="statinfo"/>
+                      </button>
+                      <button name="case_evidence_document_claimant" type="object" class="oe_stat_button" icon="fa-file" help="Evidence">
+                         <field string="Claimant" name="evidence_count_claimant" widget="statinfo"/>
+                      </button>
+                    </div>
+                  
+                  <group>
+                      <group>
+                          <field name="evidance_name"/>
+                          <field name="evidance_case" options='{"no_create": 1, "no_create_edit": 1}'/>
+                          <field name="evidence_case_name"/>
+                          <field name="trail_evidance_id" options='{"no_create": 1, "no_create_edit": 1}'/>
+                          <field name='judgment_id' context="{'default_judgment_id' : judgment_id}"/>
+                      </group>
+                      <group>
+                        <field name="lawyer_visible"/>
+                        <field name="evidance_lawyer" options="{'no_create': True,'no_open': True}" attrs="{'invisible': [('lawyer_visible','!=','lawyer')]}"/>
+                        <field name="evidance_opposition_lawyer" options="{'no_create': True,'no_open': True}" attrs="{'invisible': [('lawyer_visible','!=','opposition')]}"/>
+                        <field name="admissible_evidance"/>
+                        <field name="evidance_created_by" options='{"no_open": True}'/>
+                      </group>
+                  </group>
+                  <notebook>
+                    <page string="Description" name="evidance_description">
+                        <field name="evidance_description"/>
+                    </page>
+                    <page string="Documents(Defendant)">
+                      <field name="evidence_document_defendant_ids" readonly="1">
+                          <tree editable="bottom">
+                              <field name="doc_name"/>
+                              <field name="doc_id" widget="many2many_binary"/>
+                              <field name="comment"/>
+                              <field name="date"/>
+                              <field name="evi_created_by"/>
+                          </tree>
+                      </field>
+                    </page>
+                    <page string="Documents(Claimant)">
+                      <field name="evidence_document_claimant_ids" readonly="1">
+                          <tree editable="bottom">
+                              <field name="doc_name"/>
+                              <field name="doc_id" widget="many2many_binary"/>
+                              <field name="comment"/>
+                              <field name="date"/>
+                              <field name="evi_created_by"/>
+                          </tree>
+                      </field>
+                    </page>
+                  </notebook>
+            	</sheet>
+              <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+   
+    <record model="ir.actions.act_window" id="case_trail_evidance_action">
+          <field name="name">Evidence</field>
+          <field name="res_model">case.trail.evidance</field>
+          <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem id="menu_case_trail_evidance_action" parent="menu_case_management_forms" action="case_trail_evidance_action" sequence="3"/>
+    <!--Evidance View Start-->
+
+      <!--Evidence Document View Start-->
+      <record id="view_case_evidence_document_defendant_tree" model="ir.ui.view">
+        <field name="name">case.evidence.document.defendant.tree</field>
+        <field name="model">case.evidence.document.defendant</field>
+        <field name="arch" type="xml">
+              <tree string="Evidence Document" delete="0"  duplicate="false">
+                  <field name="doc_name"/>
+                  <field name="doc_id" widget="many2many_binary"/>
+                  <field name="comment"/>
+                  <field name="date"/>
+                  <field name="evi_created_by"/>
+              </tree>
+          </field>
+      </record>
+
+      <record id="view_case_evidence_document_defendant_form" model="ir.ui.view">
+        <field name="name">case.evidence.document.defendant.form</field>
+        <field name="model">case.evidence.document.defendant</field>
+        <field name="arch" type="xml">
+            <form string="Trial Document" delete="0"  duplicate="false">
+              <sheet>
+                  <group>
+                    <group>
+                      <field name="evidence_document_id" required="1" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                      <field name="doc_name"/>
+                      <field name="doc_id" widget="many2many_binary"/>
+                    </group>
+                    <group>
+                      <field name="date"/>
+                      <field name="comment"/>
+                      <field name="evi_created_by" options='{"no_open": True}'/>
+                    </group>
+                  </group>
+              </sheet>
+            </form>
+        </field>
+      </record>
+
+      <record model="ir.actions.act_window" id="case_evidence_document_defendant_action">
+          <field name="name">Evidence Document defendant</field>
+          <field name="res_model">case.evidence.document.defendant</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,form</field>
+          <field name="domain">[]</field>
+          <field name="context">{}</field>
+      </record>
+
+
+      <record id="view_case_evidence_document_claimant_tree" model="ir.ui.view">
+        <field name="name">case.evidence.document.claimant.tree</field>
+        <field name="model">case.evidence.document.claimant</field>
+        <field name="arch" type="xml">
+              <tree string="Evidence Document" delete="0"  duplicate="false">
+                  <field name="doc_name"/>
+                  <field name="doc_id" widget="many2many_binary"/>
+                  <field name="comment"/>
+                  <field name="date"/>
+                  <field name="evi_created_by"/>
+              </tree>
+          </field>
+      </record>
+
+      <record id="view_case_evidence_document_claimant_form" model="ir.ui.view">
+        <field name="name">case.evidence.document.claimant.form</field>
+        <field name="model">case.evidence.document.claimant</field>
+        <field name="arch" type="xml">
+            <form string="Trial Document" delete="0"  duplicate="false">
+              <sheet>
+                  <group>
+                    <group>
+                      <field name="evidence_document_id" required="1" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                      <field name="doc_name"/>
+                      <field name="doc_id" widget="many2many_binary"/>
+                    </group>
+                    <group>
+                      <field name="date"/>
+                      <field name="comment"/>
+                      <field name="evi_created_by" options='{"no_open": True}'/>
+                    </group>
+                  </group>
+              </sheet>
+            </form>
+        </field>
+      </record>
+
+      <record model="ir.actions.act_window" id="case_evidence_document_claimant_action">
+          <field name="name">Evidence Document Claimant</field>
+          <field name="res_model">case.evidence.document.claimant</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,form</field>
+          <field name="domain">[]</field>
+          <field name="context">{}</field>
+      </record>
+
+      <!-- <menuitem id="menu_evidence_document" name="Evidence" parent="menu_documents_forms" sequence="10" action="evidence_document_action"/> -->
+
+
+
+  </data>
+</odoo>

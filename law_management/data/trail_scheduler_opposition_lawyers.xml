@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+      
+    <record id="ir_cron_trial_for_opp_lawyers" forcecreate='True' model="ir.cron">
+        <field name="name">Trial Schedular for Oppo Lawyer</field>
+        <field eval="True" name="active"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="model_id" ref="model_matter_matter"/>
+        <field name="state">code</field>
+        <field name="code">model._send_trail_secheduler_email_opp_lawyer()</field>
+    </record>
+        
+    </data>
+</odoo>

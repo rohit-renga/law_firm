@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <menuitem name="Master Data" id="menu_law_management_master_data" groups="group_law_firm_user_admin,group_law_firm_case_clerk,group_law_firm_top_management" />
+
+    <menuitem id="menu_master_data" name="Master Data" parent="menu_law_management_master_data"/>
+
+    <menuitem id="menu_case_master_data" name="Case Master Data" parent="menu_law_management_master_data"/>
+
+    <menuitem id="menu_general_data" name="General Data" parent="menu_law_management_master_data"/>
+
+  </data>
+</odoo>

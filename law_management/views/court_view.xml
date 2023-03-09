@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+	<!--Court Start-->
+    <record id="view_court_tree" model="ir.ui.view">
+      <field name="name">court.court.tree</field>
+      <field name="model">court.court</field>
+      <field name="arch" type="xml">
+            <tree string="Court"  duplicate="false">
+                <field name="court_name"/>
+                <field name="court_type"/>
+                <field name="court_judge"/>
+                <field name="court_email"/>
+                <field name="count_number"/>
+            </tree>
+      </field>
+    </record>
+
+    <record id="view_court_court_form" model="ir.ui.view">
+      <field name="name">court.court.form</field>
+      <field name="model">court.court</field>
+      <field name="arch" type="xml">
+            <form string="Court"  duplicate="false">
+                <sheet>
+                  <group>
+                    <div class="oe_title">
+                      <h1>
+                        <field name="court_name" placeholder="Court Name" required="1"/>
+                      </h1>
+                    </div>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_court_account_view"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-money">
+                              <field name="account" widget="statinfo" string="Account"/>
+                        </button>
+                        <button name="action_court_judge_view"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-money">
+                              <field name="count_court_judge" widget="statinfo" string="Judge"/>
+                        </button>
+                    </div>
+                  </group>
+                    <group>
+                      <group string="Court Details">
+                          <field name="court_type" required="1"/>
+                          <!-- <field name="court_category" attrs="{'invisible': [('court_type','=','out_of_court')]}" required="1"/> -->
+                          <field name="court_selection" attrs="{'invisible': [('court_type','=','out_of_court')]}" required="1" />
+                          <field name="high_court_selection" attrs="{'invisible': [('court_selection','!=','high')]}"/>
+                          <field name="subordinate_selection" attrs="{'invisible': [('court_selection','!=','subordinate')]}"/>
+                          <field name="registry" attrs="{'invisible': [('court_selection','not in',['high','subordinate'])]}"/>
+
+                          <field name="court_judge"/>
+                          <field name="court_email"/>
+                          <field name='fax_no'/>
+                          <field name="court_admin"/>
+                          <field name="case_clerk"/>
+                          <!-- <label for="count_number" string="Contact"/>
+                          <div class="o_address_format"> -->
+                          <field name="count_number"/>
+                          <field name="court_number1"/>
+                          <!-- </div> -->
+                          <field name='room_status_court'/>
+                      </group>
+                      <group string="Address">
+                          <label for="street" string="Address"/>
+                          <div class="o_address_format">
+                              <field name="street" placeholder="Street..." class="o_address_street"/>
+                              <field name="street2" placeholder="Street 2..." class="o_address_street" />
+                              <field name="city_id" placeholder="City" class="o_address_city" style="width: 48%"/>
+                              <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open":True}' context="{'country_id': country_id,'zip': zip}" style="width: 48%"/>
+                              <field name="zip" placeholder="ZIP" class="o_address_zip" style="width: 48%"/>
+                              <field name="district_id" placeholder="District" style="width: 52%"/>
+                              <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open":True, "no_create": True}' />
+                          </div>
+                          <field name="court_created_by" options='{"no_open": True}'/>
+                      </group>
+                    </group>
+                    <notebook>
+                        <page name="court_judge" string="Judge Details">
+                                <field name="judge_details_ids" domain="[('judge_details_id','=',active_id)]" readonly="1">
+                                    <tree editable="bottom">
+                                        <field name="judge_name"/>
+                                        <field name="practice_id"/>
+                                        <field name="start_date"/>
+                                        <field name="end_date"/>
+                                        <field name="previous_court"/>
+                                    </tree>
+                                </field>
+                        </page>
+                        <page string="Account">
+                          <field name="account_details_ids" domain="[('court_id','=',active_id)]" readonly="1">
+                            <tree>
+                              <field name="account_number"/>
+                              <field name="court_account"/>
+                              <field name="bank"/>
+                              <field name="account_type"/>
+                            </tree>
+                          </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_court_search" model="ir.ui.view">
+      <field name="name">court.court.search</field>
+      <field name="model">court.court</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="court_name"/>
+                <filter name="fil_name" domain="[]" string="Name" context="{'group_by':'court_name'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="court_action">
+          <field name="name">Court</field>
+          <field name="res_model">court.court</field>
+          <field name="view_mode">tree,form</field>
+          <field name="search_view_id" ref="view_court_search"/>
+          <field name="context">{'search_default_fil_location': 1}</field>
+    </record>
+
+
+    <menuitem id="menu_court_action" parent="menu_master_data"  action="court_action" sequence="9"/>
+    <!--Court End-->
+
+    <!-- Court Room Start -->
+    <record id="view_court_room_tree" model="ir.ui.view">
+      <field name="name">court.room.tree</field>
+      <field name="model">court.room</field>
+      <field name="arch" type="xml">
+            <tree string="Court Room"  duplicate="false">
+                <field name="name"/>
+                <field name="court_id"/>
+                <field name="room_status"/>
+            </tree>
+      </field>
+    </record>
+
+    <record id="view_court_room_form" model="ir.ui.view">
+      <field name="name">court.room.form</field>
+      <field name="model">court.room</field>
+        <field name="arch" type="xml">
+            <form string="Court Room"  duplicate="false">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                          <field name="court_room_seq" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="court_id" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' required="1"/>
+                            <field name="name" required="1"/>
+                            <field name="room_status" required="1"/>
+                        </group>
+                        <group>
+                          <field name="court_room_created_by" options='{"no_open": True}'/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                      <field name="message_follower_ids" widget="mail_followers"/>
+                      <field name="message_ids" widget="mail_thread"/>
+                  </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_court_room_search" model="ir.ui.view">
+      <field name="name">court.room.search</field>
+      <field name="model">court.room</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="room_status"/>
+                <filter name="fil_name" domain="[]" string="Name" context="{'group_by':'name'}"/>
+                <filter name="fil_status" domain="[]" string="Status" context="{'group_by':'room_status'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="court_room_action">
+          <field name="name">Court Room</field>
+          <field name="res_model">court.room</field>
+          <field name="view_mode">tree,form</field>
+          <field name="search_view_id" ref="view_court_room_search"/>
+          <field name="context">{'search_default_fil_location': 1}</field>
+    </record>
+
+    <menuitem id="menu_court_room_action" parent="menu_general_data"  action="court_room_action" sequence="4"/>
+    <!-- Court Room End -->
+
+    <!-- Court Category Start-->
+    <record id="view_court_category_tree" model="ir.ui.view">
+      <field name="name">court.category.tree</field>
+      <field name="model">court.category</field>
+      <field name="arch" type="xml">
+            <tree string="Court Room"  duplicate="false">
+                <field name="name"/>
+            </tree>
+      </field>
+    </record>
+
+    <record id="view_court_category_form" model="ir.ui.view">
+      <field name="name">court.category.form</field>
+      <field name="model">court.category</field>
+        <field name="arch" type="xml">
+            <form string="Court Room"  duplicate="false">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                      <field name="message_follower_ids" widget="mail_followers"/>
+                      <field name="message_ids" widget="mail_thread"/>
+                  </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_court_category_search" model="ir.ui.view">
+      <field name="name">court.category.search</field>
+      <field name="model">court.category</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="court_category_action">
+          <field name="name">Court Category</field>
+          <field name="res_model">court.category</field>
+          <field name="view_mode">tree,form</field>
+          <field name="search_view_id" ref="view_court_category_search"/>
+    </record>
+
+    <menuitem id="menu_court_category_action" parent="menu_general_data"  action="court_category_action" sequence="5"/>
+    <!-- Court Category End-->
+
+  </data>
+</odoo>

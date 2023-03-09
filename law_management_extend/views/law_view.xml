@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="view_client_details_form_extended" model="ir.ui.view">
+        <field name="name">client.client.inherit</field>
+        <field name="model">client.client</field>
+        <field name="inherit_id" ref="law_management.view_client_details_form"/>
+        <field name="arch" type="xml">
+            <field name="client_type" position="after">
+                <field name="department_id"/>
+                <field name="contact_person"/>
+                <field name="contact_phone"/>
+            </field>
+        </field>
+    </record>
+
+
+     <record id="view_accuse_details_form_extended" model="ir.ui.view">
+        <field name="name">accuse.details.inherit</field>
+        <field name="model">accuse.details</field>
+        <field name="inherit_id" ref="law_management.view_accuse_details_form"/>
+        <field name="arch" type="xml">
+            <field name="accuse_created_by" position="after">
+                <field name="name_claimant_firm"/>
+                <field name="nationality"/>
+                <field name="national_id"   />
+                <field name="contact_details"   />
+            </field>
+        </field>
+    </record>
+
+     <record id="view_accuse_details_defendant_form_extended" model="ir.ui.view">
+        <field name="name">accuse.details.defendant.inherit</field>
+        <field name="model">accuse.details.defendant</field>
+        <field name="inherit_id" ref="law_management.view_accuse_details_defendant_form"/>
+        <field name="arch" type="xml">
+            <field name="accuse_created_by" position="after">
+                <field name="name_claimant_firm"/>
+                <field name="nationality"/>
+                <field name="national_id"   />
+                <field name="contact_details"   />
+            </field>
+        </field>
+    </record>
+
+     <record id="view_lawyer_details_form_lawyer" model="ir.ui.view">
+        <field name="name">lawyer.details.inherit</field>
+        <field name="model">lawyer.details</field>
+        <field name="inherit_id" ref="law_management.view_lawyer_details_form"/>
+        <field name="arch" type="xml">
+            <field name="lawyer_emailW" position="after">
+                <field name="name_lawyer"/>
+                <!-- <field name="nationality"/> -->
+                <field name="national_id"   />
+                <!-- <field name="contact_details"   /> -->
+            </field>
+        </field>
+    </record>
+
+    <record id="view_opposition_lawyer_form_extend" model="ir.ui.view">
+        <field name="name">opposition.lawyer.inherit</field>
+        <field name="model">opposition.lawyer</field>
+        <field name="inherit_id" ref="law_management.view_opposition_lawyer_form"/>
+        <field name="arch" type="xml">
+            <field name="opp_lawyer_created_by" position="after">
+                <field name="national_id"/>
+                <!-- <field name="nationality"/> -->
+                <field name="contact_details"   />
+                <!-- <field name="contact_details"   /> -->
+            </field>
+        </field>
+    </record>
+
+     <record id="view_case_evidence_document_claimant_form_extend" model="ir.ui.view">
+        <field name="name">case.evidence.document.claimant</field>
+        <field name="model">case.evidence.document.claimant</field>
+        <field name="inherit_id" ref="law_management.view_case_evidence_document_claimant_form"/>
+        <field name="arch" type="xml">
+            <field name="evidence_document_id" position="attributes">
+               <attribute name="invisible">1</attribute>
+                <!-- <field name="contact_details"   /> -->
+            </field>
+        </field>
+    </record>
+
+     <record id="view_case_evidence_document_defendant_form_extend" model="ir.ui.view">
+        <field name="name">case.evidence.document.defendant</field>
+        <field name="model">case.evidence.document.defendant</field>
+        <field name="inherit_id" ref="law_management.view_case_evidence_document_defendant_form"/>
+        <field name="arch" type="xml">
+            <field name="evidence_document_id" position="attributes">
+               <attribute name="invisible">1</attribute>
+                <!-- <field name="contact_details"   /> -->
+            </field>
+        </field>
+    </record>
+
+    <record id="view_matter_matter_form_extend" model="ir.ui.view">
+        <field name="name">matter.matter</field>
+        <field name="model">matter.matter</field>
+        <field name="inherit_id" ref="law_management.view_matter_matter_form"/>
+        <field name="arch" type="xml">
+            <field name="file_owner" position="after">
+                <field name="registry_options"  attrs="{'invisible': [('file_owner','!=','registry')]}"/>
+                <!-- <field name="contact_details"   /> -->
+            </field>
+        </field>
+    </record>
+
+    
+    
+
+
+    
+
+</odoo>

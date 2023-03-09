@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="indimedi_hr_expense_form_view_inherit" model="ir.ui.view">
+        <field name="name">indimedi.hr.expense.form.inherit</field>
+        <field name="model">hr.expense</field>
+        <field name="inherit_id" ref="hr_expense.hr_expense_form_view"/>
+        <field name="arch" type="xml">
+            <field name="product_id" position="attributes">
+                <attribute name="string">Case Expenses</attribute>
+            </field>
+            <field name="date" position="after">
+                <field name="case_expense_id" options="{'no_open': True}"/>
+                <field name="exp_case_name"/>
+            </field>
+            <field name="description" position="replace">
+                <notebook>
+                    <page string="Note">
+                        <field name='description'/>
+                    </page>
+                </notebook>
+            </field>
+            <xpath expr="//sheet/group/group[3]" position="replace">
+                <group>
+                    <field name="total_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+        <record id="hr_expense.hr_expense_actions_my_unsubmitted" model="ir.actions.act_window">
+            <field name="name">My Expenses to Submit</field>
+            <field name="res_model">hr.expense</field>
+            
+        </record>
+
+        
+
+
+</odoo>

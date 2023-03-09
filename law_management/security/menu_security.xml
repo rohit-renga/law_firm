@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="make_invisible" model="res.groups">
+        <field name="name">Invisible Project(Menu)</field>
+    </record>
+    <record id="project.menu_main_pm" model="ir.ui.menu">
+        <field eval="[(6,0,[ref('make_invisible')])]" name="groups_id"/>
+    </record>
+    <record id="make_invisible_emp" model="res.groups">
+        <field name="name">Invisible Employee(Menu)</field>
+    </record>
+    <record id="hr.menu_hr_root" model="ir.ui.menu">
+        <field eval="[(6,0,[ref('make_invisible_emp')])]" name="groups_id"/>
+    </record>
+</odoo>

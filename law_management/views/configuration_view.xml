@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <menuitem name="Configuration" id="menu_law_management_configuration" parent="menu_law_management_master_data"/>
+
+    <!-- <menuitem name="Configuration" id="menu_configuration_forms" parent="menu_law_management_configuration"/> -->
+
+    <!-- <menuitem name="Document" id="menu_documents_forms" parent="menu_law_management_configuration"/> -->
+  
+  </data>
+</odoo>

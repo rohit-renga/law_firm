@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+  	<!--Trail View Start-->
+    <record id="view_case_trail_tree" model="ir.ui.view">
+      <field name="name">case.trail.tree</field>
+      <field name="model">case.trail</field>
+      <field name="arch" type="xml">
+        	<tree string="Trial" duplicate="false">
+      	      <field name="client_name" invisible="1"/>
+              <field name="client_ids" widget="many2many_tags"/>
+              <!-- <field name="accuse_ids" widget="many2many_tags"/> -->
+              <field name="matter_name"/>
+              <field name="t_case_name"/>
+              <field name="trail_name" string="Trial name"/>
+              <field name="trail_date" string="Trial date"/>
+              <field name="court_name"/>
+              <field name="court_roomno"/>
+              <field name="judge_name"/>
+              <field name="lawyer_name"/>
+              <field name="opposition_lawyer_name"/>
+        	</tree>
+      </field>
+    </record>
+
+    <record id="view_case_trail_form" model="ir.ui.view">
+      <field name="name">case.trail.form</field>
+      <field name="model">case.trail</field>
+        <field name="arch" type="xml">
+            <form string="Trial" duplicate="false">
+            	<sheet>
+                <group>
+                  <div class="oe_title">
+                    <h1>
+                        <field name="trail_name" placeholder='Trial Name'/>
+                    </h1>
+                  </div>
+                    <div class="oe_right oe_button_box" name="button_box" position="inside">
+                        <button name="case_trail_judgement" type="object" class="oe_stat_button"  icon="fa-tasks" help="Case Trial Judgement">
+                          <field string="Judgement" name="judgement_count" widget="statinfo"/>
+                        </button>
+                        <button name="case_trail_evidence" type="object" class="oe_stat_button" icon="fa-file" help="Case Trial Evidance">
+                            <field string="Evidence" name="evidance_count" widget="statinfo"/>
+                        </button>
+                        <button name="case_trail_document" type="object" class="oe_stat_button" icon="fa-file" help="Case Documents">
+                            <field string="Document" name="ctrail_d_count" widget="statinfo"/>
+                          </button>
+                    </div>
+                </group>
+            		<group>
+                  <group string="Case Details">
+                    	<field name="matter_name" string="Case Number"/>
+                      <field name="t_case_name"/>
+                      <field name="client_name" invisible="1"/>
+                      <field name="accuse_name" invisible="1"/>
+                      <field name="client_ids" widget="many2many_tags"/>
+                      <field name="accuse_ids" widget="many2many_tags"/>
+                    	<field name="trail_date"/>                      
+						     </group>
+      						<group string="General Inforation">
+      							<field name="court_name" options="{'no_create': True,'no_open': True}"/>
+      							<field name="court_roomno"/>
+      							<field name="judge_name" options="{'no_create': True,'no_open': True}"/>
+                    <field name="lawyer_name" options="{'no_create': True,'no_open': True}"/>
+                    <field name="opposition_lawyer_name" options="{'no_create': True,'no_open': True}"/>
+                    <field name="trail_created_by" options='{"no_open": True}'/>
+      						</group>
+                </group>
+                <notebook>
+                  <page name="trail_description" string="Trial Description">
+                    <field name="trail_description" nolabel="1"/>
+                  </page>
+                  <page name="trail_judgement" string="Judgement">
+                    <field name="trail_judgement_ids" nolabel="1" colspan="2" domain="[('trail_judgement_id', '=', active_id)]" readonly='1'>
+                          <tree>
+                            <field name="client_name"/>
+                            <field name="accused"/>
+                            <field name="case"/>
+                            <field name="judgement_description"/>
+                            <!-- <field name="law_code"/> -->
+                          </tree>
+                      </field>
+                  </page>
+                  <page name="trail_evidance" string="Evidence">
+                      <field name="trail_evidance_ids" domain="[('trail_evidance_id', '=', active_id)]" nolabel="1" colspan="2" readonly="1">
+                          <tree>
+                            <field name="evidance_name"/>
+                            <field name="evidance_case"/>
+                            <field name="trail_evidance_id"/>
+                            <field name="evidance_lawyer"/>
+                            <!-- <field name="judgement_evidence"/> -->
+                            <field name="evidance_opposition_lawyer"/>
+                          </tree>
+                      </field>
+                  </page>
+                  <page name="trail_document" string="Documents">
+                      <field name="trail_document_ids" domain="[('trail_document_id','=',active_id)]" readonly="1">
+                      <tree>
+                          <field name="doc_name"/>
+                          <field name="doc_id" widget="many2many_binary"/>
+                          <field name="date"/>
+                          <field name="comment"/>
+                          <field name="trd_created_by"/>
+                      </tree>
+                  </field>
+                  </page>
+                </notebook>
+            	</sheet>
+              <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--Calendar View Start-->
+    <record id="view_matter_calendar" model="ir.ui.view">
+        <field name="name">case.trail.calendar</field>
+        <field name="model">case.trail</field>
+        <field name="arch" type="xml">
+            <calendar color="client_name" date_start="trail_date" string="Case Trail" mode="month">
+                <field name="trail_name"/>
+                <field name="matter_name"/>
+                <field name="client_name"/>
+                <!-- <field name="judge_name"/> -->
+                <!-- <field name="lawyer_name"/> -->
+                <!-- <field name="opposition_lawyer_name"/> -->
+            </calendar>
+        </field>
+    </record>
+    <!--Calendar View End-->
+
+    <!--Graph View Start-->
+    <record id="view_invoice_graph" model="ir.ui.view">
+        <field name="name">case.trail.graph</field>
+        <field name="model">case.trail</field>
+        <field name="arch" type="xml">
+            <graph string="Trial">
+                <field name="trail_name"/>
+                <field name="trail_date" />
+            </graph>
+        </field>
+    </record>
+    <!--Graph View End-->
+
+   
+    <record model="ir.actions.act_window" id="case_trail_action">
+          <field name="name">Trial</field>
+          <field name="res_model">case.trail</field>
+          <field name="view_mode">tree,form,calendar,graph</field>
+    </record>
+
+
+    <menuitem id="menu_case_trail_action" parent="menu_case_management_forms"  action="case_trail_action" sequence="2"/>
+    <!--Trail View Start-->
+
+    <!--Trail Document View Start-->
+      <record id="view_trail_document_tree" model="ir.ui.view">
+        <field name="name">case.trail.document.tree</field>
+        <field name="model">case.trail.document</field>
+        <field name="arch" type="xml">
+              <tree string="Trial Document" delete="0" duplicate="false">
+                  <field name="doc_name"/>
+                  <field name="doc_id"/>
+                  <field name="comment"/>
+                  <field name="date"/>
+                  <field name="trd_created_by"/>
+              </tree>
+          </field>
+      </record>
+
+      <record id="view_trail_document_form" model="ir.ui.view">
+        <field name="name">case.trail.document.form</field>
+        <field name="model">case.trail.document</field>
+        <field name="arch" type="xml">
+            <form string="Trial Document" delete="0" duplicate="false">
+              <sheet>
+                  <group>
+                    <group>
+                      <field name="trail_document_id" required="1" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                      <field name="doc_name"/>
+                      <field name="doc_id" widget="many2many_binary"/>
+                    </group>
+                    <group>
+                      <field name="date"/>
+                      <field name="comment"/>
+                      <field name="trd_created_by" options='{"no_open": True}'/>
+                    </group>
+                  </group>
+              </sheet>
+            </form>
+        </field>
+      </record>
+
+      <record model="ir.actions.act_window" id="trail_document_action">
+          <field name="name">Trial Document</field>
+          <field name="res_model">case.trail.document</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,form</field>
+          <field name="domain">[]</field>
+          <field name="context">{}</field>
+      </record>
+
+      <!-- <menuitem id="menu_plaintiff_document" name="Trail" parent="menu_documents_forms" sequence="9" action="trail_document_action"/> -->
+      <!--Trail Document View End-->
+
+  </data>
+</odoo>

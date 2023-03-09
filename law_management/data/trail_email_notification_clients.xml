@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Client Email Notification Start-->
+        <record id="email_template_trail_notification_client" model="mail.template">
+            <field name="name">Client Trial</field>
+            <field name="model_id" ref="model_matter_matter"/>
+            <field name="email_from">${(user.email)|safe}</field>
+            <field name="email_to">${object.get_client_ids()}</field>
+            <field name="subject">Trial Subject!!!</field>
+                <field name="body_html"><![CDATA[
+                <p>Dear Sir/Madam,
+                Your Next Trial Date is : ${object.trial_date}</p><br></br>
+
+                Case no : <strong>${object.matter_seq}</strong><br></br>
+                Case name : <strong>${object.case_name}</strong><br></br>
+                Lawyer Details : <strong>Name : ${object.assign_id.lawyer_name}, Mobile : ${object.assign_id.lawyer_mobileW}, Mail : ${object.assign_id.lawyer_emailW}, </strong><br></br>
+                Court Details : <strong>Court : ${object.court_id.court_name}, Mail : ${object.court_id.court_email},Contact No: ${object.court_id.court_number}</strong><br></br>
+
+                <br></br><br></br><br></br><br></br>
+                This is system generated mail.
+            ]]>
+            </field>
+        </record>
+
+        <!-- Client Email Notification End-->
+        <record id="email_template_trail_notification_judge" model="mail.template">
+            <field name="name">Judge Trial</field>
+            <field name="model_id" ref="model_matter_matter"/>
+            <field name="email_from">${(user.email)|safe}</field>
+            <field name="email_to">${(object.judge_id.judge_emailW)}</field>
+            <field name="subject">Upcoming Trial Update</field>
+                <field name="body_html"><![CDATA[
+                <p>Respected Sir/Madam,</p>
+                <br></br>
+
+                You are judge in trials on Date :- <strong> ${object.trial_date} </strong>
+                with following details
+                <br></br>
+                <br></br>
+                Case no : <strong>${object.matter_seq}</strong>
+                <br></br>
+                <br></br>
+                Case name : <strong>${object.case_name}</strong>
+                <br></br>
+                <br></br>
+                Plaintiff : 
+                % for client in object.client_name_many:
+                    <strong>${client.client_name}, </strong>
+                % endfor
+                <br></br>
+                <br></br>
+                Lawyer Details : <strong>Name : ${object.assign_id.lawyer_name}, Mobile : ${object.assign_id.lawyer_mobileW}, Mail : ${object.assign_id.lawyer_emailW}, </strong>
+                <br></br>
+                <br></br>
+                Accuse : <strong>${object.accused.accuse_name}</strong>
+                <br></br>
+                <br></br>
+                Accuse Lawyer : <strong>${object.opp_lawyer_id.opposition_lawyer_name}</strong>
+                <br></br>
+                <br></br>
+                Court Details : <strong>Court : ${object.court_id.court_name}, Mail : ${object.court_id.court_email},Contact No: ${object.court_id.court_number}</strong>
+                <br></br>
+                <br></br>
+
+                <br></br><br></br><br></br><br></br>
+                This is system generated mail.
+            ]]>
+            </field>
+        </record>
+
+        <record id="email_template_trail_notification_opp_lawyer" model="mail.template">
+            <field name="name">Claimant/Plaintiff Lawyer Trial</field>
+            <field name="model_id" ref="model_matter_matter"/>
+            <field name="email_from">${(user.email)|safe}</field>
+            <field name="email_to">${(object.opp_lawyer_id.opposition_emailW)}</field>
+            <field name="subject">Upcoming Trial Update</field>
+                <field name="body_html"><![CDATA[
+                <p>Respected Sir/Madam,</p>
+                Your client as accuse having trials on Date :- <strong> ${object.trial_date} </strong>
+                as per below details <br></br>
+                <br></br> 
+                Case no : <strong>${object.matter_seq}</strong><br></br>
+                Case name : <strong>${object.case_name}</strong><br></br>
+                Plantiff Lawyer Details : <strong>Name : ${object.assign_id.lawyer_name}, Mobile : ${object.assign_id.lawyer_mobileW}, Mail : ${object.assign_id.lawyer_emailW}, </strong><br></br>
+                Court Details : <strong>Court : ${object.court_id.court_name}, Mail : ${object.court_id.court_email},Contact No: ${object.court_id.court_number}</strong><br></br>
+
+                <br></br><br></br><br></br><br></br>
+                This is system generated mail.
+            ]]>
+            </field>
+        </record>
+
+        <record id="email_template_trail_notification_accuse" model="mail.template">
+            <field name="name">Claimant / Plaintiff Trial</field>
+            <field name="model_id" ref="model_matter_matter"/>
+            <field name="email_from">${(user.email)|safe}</field>
+            <field name="email_to">${object.get_accuse_ids()}</field>
+            <field name="subject">Upcoming Trial Update</field>
+                <field name="body_html"><![CDATA[
+                <p>Dear Sir/Madam,</p>
+                <br></br>
+                You have trial with your lawyer on Date :- <strong> ${object.trial_date} </strong> as per below details.<br></br>
+                <br></br>
+
+                Case no : <strong>${object.matter_seq}</strong><br></br>
+                <br></br>
+                Case name : <strong>${object.case_name}</strong><br></br>
+                <br></br>
+                Lawyer Details : <strong>Name : ${object.opp_lawyer_id.opposition_lawyer_name}, Mobile : ${object.opp_lawyer_id.opposition_mobileW}, Mail : ${object.opp_lawyer_id.opposition_emailW}, </strong><br></br>
+                <br></br>
+                Court Details : <strong>Court : ${object.court_id.court_name}, Mail : ${object.court_id.court_email},Contact No: ${object.court_id.court_number}</strong><br></br>
+
+                <br></br><br></br><br></br><br></br>
+                This is system generated mail.
+            ]]>
+            </field>
+        </record>
+
+    </data>
+</odoo>

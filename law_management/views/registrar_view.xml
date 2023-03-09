@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+	   <!--Registrar Details Start-->
+      <record id="view_registrar_details_tree" model="ir.ui.view">
+      <field name="name">registrar.details.tree</field>
+      <field name="model">registrar.details</field>
+      <field name="arch" type="xml">
+            <tree string="Judicial Officer" duplicate="false">
+              <field name="name"/>
+              <field name="registrar_email"/>
+              <field name="registrar_phone"/>
+              <field name="registrar_mobile"/>
+            </tree>
+      </field>
+    </record>
+
+    <record id="view_registrar_details_form" model="ir.ui.view">
+      <field name="name">registrar.details.form</field>
+      <field name="model">registrar.details</field>
+      <field name="arch" type="xml">
+          <form string="Judicial Officer" duplicate="false">
+              <sheet>
+                <field name="image" widget="image" class="oe_avatar" />
+                    <div class="oe_title">
+                        <h1>
+                            <field name="registrar_id" readonly="1"/>
+                        </h1>
+                        <h1>
+                          <field name="registrar_name" placeholder="Registrar Name" required="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                      <group>
+                        <field name="category"/>
+                        <field name="registrar_email"/>
+                        <field name="registrar_phone"/>
+                      </group>
+                      <group>
+                        <field name="registrar_mobile"/>
+                        <field name="registrar_website"/>
+                      </group>
+                    </group>
+                    <group>
+                      <group string="Physical Address">
+                          <label for="ph_street" string="Address"/>
+                          <div class="o_address_format">
+                              <field name="ph_street" placeholder="Street..." class="o_address_street"/>
+                              <field name="ph_street2" placeholder="Street 2..." class="o_address_street" />
+                              <field name="ph_city_id" placeholder="City" class="o_address_city" style="width: 48%"/>
+                              <field name="ph_village" placeholder="Village" class="o_address_city"/>
+                              <field name="ph_state_id" class="o_address_state" placeholder="State" options='{"no_open":True}' context="{'ph_country_id': ph_country_id,'ph_zip': ph_zip}" style="width: 48%"/>
+                              <field name="ph_district_id" placeholder="District" style="width: 52%"/>
+                              <field name="ph_zip" placeholder="ZIP" class="o_address_zip" style="width: 48%"/>
+                              <field name="ph_country_id" placeholder="Country" class="o_address_country" options='{"no_open":True, "no_create": True}' />
+                          </div>
+                      </group>
+                      <group string="Postal Address">
+                          <field name="copy_address"/>
+                          <label for="po_street" string="Address"/>
+                          <div class="o_address_format">
+                              <field name="po_street" placeholder="Street..." class="o_address_street"/>
+                              <field name="po_street2" placeholder="Street 2..." class="o_address_street" />
+                              <field name="po_city_id" placeholder="City" class="o_address_city" style="width: 48%"/>
+                              <field name="po_village" placeholder="Village" class="o_address_city"/>
+                              <field name="po_state_id" class="o_address_state" placeholder="State" options='{"no_open":True}' context="{'po_country_id': po_country_id,'po_zip': po_zip}" style="width: 48%"/>
+                              <field name="po_district_id" placeholder="District" style="width: 52%"/>
+                              <field name="po_zip" placeholder="ZIP" class="o_address_zip" style="width: 48%"/>
+                              <field name="po_country_id" placeholder="Country" class="o_address_country" options='{"no_open":True, "no_create": True}' />
+                          </div>
+                      </group>
+                    </group>
+
+              </sheet>
+              <div class="oe_chatter">
+                  <field name="message_follower_ids" widget="mail_followers"/>
+                  <field name="message_ids" widget="mail_thread"/>
+              </div>
+          </form>
+      </field>
+    </record>
+
+    <record id="view_registrar_details_kanban" model="ir.ui.view">
+      <field name="name">registrar.details.kanban</field>
+      <field name="model">registrar.details</field>
+      <field name="arch" type="xml">
+          <kanban class="o_hr_employee_kanban">
+                <field name="id"/>
+                <field name="image"/>
+                <field name="name"/>
+                <field name="registrar_email"/>
+                <field name="registrar_phone"/>
+                <field name="registrar_mobile"/>
+              <templates>
+                  <t t-name="kanban-box">
+                      <div class="oe_kanban_global_click o_res_partner_kanban">
+                          <div class="o_kanban_image">
+                              <img t-att-src="kanban_image('registrar.details', 'image', record.id.raw_value)"/>
+                          </div>
+                          <div class="oe_kanban_details">
+                              <div class="o_kanban_tags_section oe_kanban_partner_categories"/>
+                              <ul>
+                                  <li t-if="record.name.raw_value"><field name="name"/></li>
+                                  <li t-if="record.registrar_email.raw_value"><field name="registrar_email"/></li>
+                                  <li t-if="record.registrar_phone.raw_value"><field name="registrar_phone"/></li>
+                                  <li t-if="record.registrar_mobile.raw_value"><field name="registrar_mobile"/></li>
+                              </ul>
+                          </div>
+                      </div>
+                  </t>
+              </templates>
+          </kanban>
+      </field>
+    </record>
+
+    <record id="view_registrar_details_search" model="ir.ui.view">
+      <field name="name">registrar.details.search</field>
+      <field name="model">registrar.details</field>
+        <field name="arch" type="xml">
+          <search>
+            <field name="name"/>
+            <field name="registrar_email"/>
+            <field name="registrar_phone"/>
+            <field name="registrar_mobile"/>
+          </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="registrar_details_action">
+        <field name="name">Judicial Officer</field>
+        <field name="res_model">registrar.details</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="search_view_id" ref="view_registrar_details_search"/>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+   
+      <menuitem  id="menu_registrar_details" name="Judicial Officer" parent="menu_master_data" sequence="11" action="registrar_details_action"/>
+      <!--Registrar Details End-->
+  </data>
+</odoo>

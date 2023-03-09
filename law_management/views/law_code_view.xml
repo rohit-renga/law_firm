@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+	<!-- Law code start -->
+    <record id="view_law_code_tree" model="ir.ui.view">
+      <field name="name">law.code.tree</field>
+      <field name="model">law.code</field>
+      <field name="arch" type="xml">
+          <tree string="Law Code" duplicate="false">
+              <field name="code_number"/>
+              <field name="ammendment_law_code"/>
+              <field name="obselete_law_code"/>
+              <field name="is_obselete"/>
+              <field name="year_in_place"/>
+          </tree>
+      </field>
+    </record>
+
+    <record id="view_law_code_form" model="ir.ui.view">
+      <field name="name">law.code.form</field>
+      <field name="model">law.code</field>
+        <field name="arch" type="xml">
+            <form string="Law Code" duplicate="false">
+                <sheet>
+                  <div class="oe_button_box" name="button_box">
+                    <button name="action_articles_view" type="object" class="oe_stat_button" icon="fa-newspaper-o">
+                      <field string="Articles" name="article" widget="statinfo"/>
+                    </button>
+                    <button name="action_law_code_document" type="object" class="oe_stat_button" icon="fa-pencil-square-o">
+                        <field string="Documents" name="lc_doc_count" widget="statinfo"/>
+                    </button>
+                  </div>
+                  <group>
+                    <group>
+                        <field name="code_number" required="1"/>
+                        <field name="is_obselete"/>
+                        <field name="year_in_place" required="1"/>
+                    </group>
+                    <group>
+                      <field name="lc_created_by" options='{"no_open": True}'/>
+                      <field name="short_des"/>
+                    </group>
+                  </group>
+                  <notebook>
+                    <page string="Description">
+                      <field name="desciption" widget="html"/>
+                    </page>
+                    <page string="Reference Code Number">
+                      <group>
+                        <field name="ammendment_law_code"/>
+                        <field name="obselete_law_code"/>
+                      </group>
+                    </page>
+                    <page string="Document">
+                      <field name="law_code_document_ids" domain="[('law_code_document_id','=',active_id)]" readonly="1">
+                              <tree>
+                                <field name="doc_name"/>
+                                <field name="doc_id"  widget="many2many_binary"/>
+                                <field name="date"/>
+                                <field name="comment"/>
+                                <field name="lcd_created_by"/>
+                              </tree>
+                          </field>
+                    </page>
+                    <page string="Articles">
+                      <field name="articles_id" domain="[('article_id','=',active_id)]" readonly="1"/>
+                    </page>
+                  </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_law_code_search" model="ir.ui.view">
+      <field name="name">law.code.search</field>
+      <field name="model">law.code</field>
+        <field name="arch" type="xml">
+                <search>
+                    <field name="code_number"/>
+                    <field name="is_obselete"/>
+                    <field name="year_in_place"/>
+                    <field name="ammendment_law_code"/>
+                    <field name="obselete_law_code"/>
+                    <filter name="law_code_no" domain="[]" string="Law Code No." context="{'group_by':'code_number'}"/>
+                    <filter name="law_code_is_obselete" domain="[]" string="IS Obselete" context="{'group_by':'is_obselete'}"/>
+                    <filter name="year" domain="[]" string="Year" context="{'group_by':'year_in_place'}"/>
+                </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="law_code_action">
+          <field name="name">Law Code</field>
+          <field name="res_model">law.code</field>
+          <field name="view_mode">tree,form</field>
+          <field name="search_view_id" ref="view_law_code_search"/>
+          <field name="domain">[]</field>
+          <field name="context">{'search_default_law_code_no': 1}</field>
+    </record>
+
+    <menuitem id="menu_law_code" parent="menu_general_data" action="law_code_action" sequence="3"/>
+    <!-- Law code end -->
+
+      <!--Lawyer Document View Start-->
+      <record id="view_law_code_document_tree" model="ir.ui.view">
+        <field name="name">law.code.document.tree</field>
+        <field name="model">law.code.document</field>
+        <field name="arch" type="xml">
+              <tree string="Law Code Document" delete="0" duplicate="false">
+                  <field name="doc_name"/>
+                  <field name="doc_id" widget="many2many_binary"/>
+                  <field name="comment"/>
+                  <field name="date"/>
+                  <field name="lcd_created_by"/>
+              </tree>
+          </field>
+      </record>
+
+      <record id="view_law_code_document_form" model="ir.ui.view">
+        <field name="name">law.code.document.form</field>
+        <field name="model">law.code.document</field>
+        <field name="arch" type="xml">
+            <form string="Law Code Document" delete="0" duplicate="false">
+              <sheet>
+                  <group>
+                    <group>
+                      <field name="law_code_document_id" required="1" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                      <field name="doc_name"/>
+                      <field name="doc_no"/>
+                      <field name="doc_id" widget="many2many_binary"/>
+                    </group>
+                    <group>
+                      <field name="date"/>
+                      <field name="comment"/>
+                      <field name="lcd_created_by" options='{"no_open": True}'/>
+                    </group>
+                  </group>
+              </sheet>
+            </form>
+        </field>
+      </record>
+
+      <record model="ir.actions.act_window" id="law_code_document_action">
+          <field name="name">Law Code Document</field>
+          <field name="res_model">law.code.document</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,form</field>
+          <field name="domain">[]</field>
+          <field name="context">{}</field>
+      </record>
+
+      <!-- <menuitem id="menu_law_code_document" name="Law Code" parent="menu_documents_forms" sequence="7" action="law_code_document_action"/> -->
+      <!--Lawyer Document View End-->
+        
+   </data>
+</odoo>
