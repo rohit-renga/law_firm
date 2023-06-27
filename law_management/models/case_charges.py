@@ -19,7 +19,7 @@ class CaseCharges(models.Model):
         track_visibility='onchange')
     charges_case_name = fields.Char(related='case_name.case_name', string='Case Name')
     client_name = fields.Many2one('client.client',string='Client', track_visibility='onchange')
-    accuse_name = fields.Many2one('accuse.details',string="Accuse")
+    accuse_name = fields.Many2one('accuse.details',string="Claimant")
     number = fields.Many2one("law.code", string="Law Code",
         track_visibility='onchange')
     date = fields.Date(string="Date",default=fields.Date.today(),

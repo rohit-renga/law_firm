@@ -16,9 +16,9 @@ class PlaintiffDetails(models.Model):
 
     plaintiff_id = fields.Char(string='Plaintiff ID')
     image = fields.Binary(string='Image', attachment=True)
-    plaintiff_name = fields.Char(string='Name', ondelete="cascade", track_visibility='onchange', required=True)
+    plaintiff_name = fields.Char(string='Name', ondelete="cascade", track_visibility='onchange', required=False)
     plaintiff_mobile = fields.Char(
-        string='Mobile', track_visibility='onchange', required=True)
+        string='Mobile', track_visibility='onchange', required=False)
     plaintiff_email = fields.Char(
         string='Email ID', track_visibility='onchange')
     plaintiff_gender = fields.Selection(

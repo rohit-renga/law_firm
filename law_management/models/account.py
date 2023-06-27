@@ -6,6 +6,11 @@ from odoo.exceptions import UserError, ValidationError
 from dateutil.relativedelta import relativedelta
 import time
 
+class Category(models.Model):
+    _name = 'document.category'
+
+    name = fields.Char('Document')
+
 class Account(models.Model):
     _name = 'account.master'
     _rec_name = 'account_number'
@@ -63,7 +68,7 @@ class AccountType(models.Model):
     _order = 'create_date desc'
     _inherit = ['mail.thread']
 
-    name = fields.Char(string='Account Type',required=True,track_visibility='onchange')
+    name = fields.Char(string='Account Type',required=False,track_visibility='onchange')
     date = fields.Date(string='Date',default=fields.Date.today(),readonly=True)
     account_type_created_by = fields.Many2one(
         'res.users', string="Created By", default=lambda self: self.env.user, readonly="True")

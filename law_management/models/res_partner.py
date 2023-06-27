@@ -84,4 +84,4 @@ class IndentiryDocument(models.Model):
 # class CustomerForm(models.Model):
 #     _inherit = 'res.partner'
 
-#     customer_name = fields.Char("Name", required=True)
+#     customer_name = fields.Char("Name", required=False)

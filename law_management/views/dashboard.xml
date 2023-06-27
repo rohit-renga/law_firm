@@ -75,7 +75,7 @@
                             <field name="caseid"/>
                             <field name="case_name"/>
                             <field name="type"/>
-                            <field name="category_id" required="1" domain="[('type','=',type)]" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                            <field name="category_id" required="0" domain="[('type','=',type)]" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
                             <field name="client_name" options="{'no_open': True}" invisible="1"/>
                             <field name="client_name_many" widget="many2many_tags"/>
                             <field name="accused" options="{'no_open': True}" invisible="1"/>
@@ -95,7 +95,7 @@
                         </group>
                         <group string="Important Dates">
                             <field name="date"/>
-                            <field name="date_open" required="1"/>
+                            <field name="date_open" required="0"/>
                             <field name="trial_date"/>
                             <field name="notify_trial_date" invisible="1"/>
                             <field name="date_close"/>
@@ -366,7 +366,7 @@
                             <field name="caseid"/>
                             <field name="case_name"/>
                             <field name="type"/>
-                            <field name="category_id" required="1" domain="[('type','=',type)]" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                            <field name="category_id" required="0" domain="[('type','=',type)]" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
                             <field name="client_name" options="{'no_open': True}" invisible="1"/>
                             <field name="client_name_many" widget="many2many_tags"/>
                             <field name="accused" options="{'no_open': True}" invisible="1"/>
@@ -386,7 +386,7 @@
                         </group>
                         <group string="Important Dates">
                             <field name="date"/>
-                            <field name="date_open" required="1"/>
+                            <field name="date_open" required="0"/>
                             <field name="trial_date"/>
                             <field name="notify_trial_date" invisible="1"/>
                             <field name="date_close"/>
@@ -657,7 +657,7 @@
                             <field name="caseid"/>
                             <field name="case_name"/>
                             <field name="type"/>
-                            <field name="category_id" required="1" domain="[('type','=',type)]" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                            <field name="category_id" required="0" domain="[('type','=',type)]" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
                             <field name="client_name" options="{'no_open': True}" invisible="1"/>
                             <field name="client_name_many" widget="many2many_tags"/>
                             <field name="accused" options="{'no_open': True}" invisible="1"/>
@@ -677,7 +677,7 @@
                         </group>
                         <group string="Important Dates">
                             <field name="date"/>
-                            <field name="date_open" required="1"/>
+                            <field name="date_open" required="0"/>
                             <field name="trial_date"/>
                             <field name="notify_trial_date" invisible="1"/>
                             <field name="date_close"/>
@@ -947,7 +947,7 @@
                             <field name="caseid"/>
                             <field name="case_name"/>
                             <field name="type"/>
-                            <field name="category_id" required="1" domain="[('type','=',type)]" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                            <field name="category_id" required="0" domain="[('type','=',type)]" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
                             <field name="client_name" options="{'no_open': True}" invisible="1"/>
                             <field name="client_name_many" widget="many2many_tags"/>
                             <field name="accused" options="{'no_open': True}" invisible="1"/>
@@ -967,7 +967,7 @@
                         </group>
                         <group string="Important Dates">
                             <field name="date"/>
-                            <field name="date_open" required="1"/>
+                            <field name="date_open" required="0"/>
                             <field name="trial_date"/>
                             <field name="notify_trial_date" invisible="1"/>
                             <field name="date_close"/>

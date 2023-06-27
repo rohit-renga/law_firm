@@ -15,15 +15,15 @@ class CaseJudgement(models.Model):
     judgement_seq = fields.Char(
         size=256, string='Judgement Seq', readonly=True, default='Judgement', copy=False)
     case = fields.Many2one('matter.matter', string='Case Number',
-                           track_visibility='onchange', required=True)
+                           track_visibility='onchange', required=False)
     judgement_case_name = fields.Char(related='case.case_name', string='Case Name')
     client_name = fields.Many2one('client.client', string='Client Name', track_visibility='onchange')
     judgement_date = fields.Date(
         'Judgement Date', default=fields.Date.today(), readonly=True)
     judgement_description = fields.Text(
-        string='Judgement', track_visibility='onchange', required=True)
+        string='Judgement', track_visibility='onchange', required=False)
     judgement_category_id = fields.Many2one('case.judgement.category', string="Judgement Catrgoty")
-    type = fields.Selection([('civil', 'Civil')], string="Judgement Parent Category", required=True, default='civil')
+    type = fields.Selection([('civil', 'Civil')], string="Judgement Parent Category", required=False, default='civil')
     category_id = fields.Many2one('case.judgement.category', string='Sub Category', track_visibility='onchange')
     law_code = fields.Many2one(
         'law.code', string='Law Code', track_visibility='onchange')
@@ -156,9 +156,10 @@ class JudgementCategory(models.Model):
     type = fields.Selection(
         [('civil', 'Civil')], default='civil' , string='Parent Category')
     name = fields.Many2one('judgement.sub.categories',string='Child Category')
+    options = fields.Selection([('for','For'),('against','Against')], string="Options")
 
 class JudgementSubCategory(models.Model):
     _name = 'judgement.sub.categories'
     _rec_name = 'j_sub_category'
 
-    j_sub_category = fields.Char(string='Judgement Sub Categories',required=True)
+    j_sub_category = fields.Char(string='Judgement Sub Categories',required=False)

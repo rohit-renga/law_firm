@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        
+        <record id="seq_0" model="client.document.type">
+            <field name="name">National Id</field>
+        </record>
+
+         <record id="seq_1" model="client.document.type">
+            <field name="name">Passport</field>
+        </record>
+
+         <record id="seq_2" model="client.document.type">
+            <field name="name">Driving License</field>
+        </record>
+
+         <record id="seq_3" model="client.document.type">
+            <field name="name">Other</field>
+        </record>
+
+         <record id="seq_4" model="client.document.type">
+            <field name="name">Summons / Initial Directions</field>
+        </record>
+
+
+
+        <record id="seq_5" model="client.document.type">
+            <field name="name"> Sworn Statement</field>
+        </record>
+
+         <record id="seq_6" model="client.document.type">
+            <field name="name"> Defence</field>
+        </record>
+
+         <record id="seq_7" model="client.document.type">
+            <field name="name"> Skeleton Arguments</field>
+        </record>
+
+         <record id="seq_8" model="client.document.type">
+            <field name="name"> Trial Bundle</field>
+        </record>
+
+         <record id="seq_9" model="client.document.type">
+            <field name="name"> List of Documents</field>
+        </record>
+
+         <record id="seq_10" model="client.document.type">
+            <field name="name"> Statement of Issues</field>
+        </record>
+
+         <record id="seq_11" model="client.document.type">
+            <field name="name"> Letters</field>
+        </record>
+
+         <record id="seq_12" model="client.document.type">
+            <field name="name"> Taxation Bundle</field>
+        </record>
+
+         <record id="seq_13" model="client.document.type">
+            <field name="name"> Notice of Change of Legal Practitioner </field>
+        </record>
+
+        <record id="seq_14" model="client.document.type">
+            <field name="name"> Assessment of Damages </field>
+        </record>
+
+        <record id="seq_15" model="client.document.type">
+            <field name="name"> Assessment of Costs</field>
+        </record>
+
+         <record id="seq_16" model="client.document.type">
+            <field name="name"> Notice of Intended Lawsuit </field>
+        </record>
+
+        <record id="seq_17" model="client.document.type">
+            <field name="name"> Mediation Bundle</field>
+        </record>
+
+         <record id="seq_18" model="client.document.type">
+            <field name="name"> Witness Statement </field>
+        </record>
+
+        <record id="seq_19" model="client.document.type">
+            <field name="name"> Notice of Mediation</field>
+        </record>
+
+         <record id="seq_20" model="client.document.type">
+            <field name="name"> Ruling </field>
+        </record>
+
+        <record id="seq_21" model="client.document.type">
+            <field name="name"> Notice of Appeal</field>
+        </record>
+
+         
+
+         <record id="seq_23" model="client.document.type">
+            <field name="name"> Notice of Adjournment</field>
+        </record>
+
+         <record id="seq_24" model="client.document.type">
+            <field name="name"> Notice of Hearing</field>
+        </record>
+
+         <record id="seq_25" model="client.document.type">
+            <field name="name"> Notice of Assessment of Damage</field>
+        </record>
+
+         <record id="seq_26" model="client.document.type">
+            <field name="name"> Notice of Assessment of Damages</field>
+        </record>
+
+         <record id="seq_27" model="client.document.type">
+            <field name="name"> Judgement</field>
+        </record>
+
+
+
+</data>
+</odoo>

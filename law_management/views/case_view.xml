@@ -21,7 +21,7 @@
                     <sheet>
                         <group>
                             <group>
-                                <field name="case_stages" required="1"/>
+                                <field name="case_stages" required="0"/>
                                 <field name="case_defalut_stage"/>
                                 <field name="case_sequence"/>
                             </group>
@@ -110,8 +110,8 @@
                 <sheet>
                     <group>
                         <group>
-                            <field name="type" required="1"/>
-                            <field name="name" required="1"/>
+                            <field name="type" required="0"/>
+                            <field name="name" required="0"/>
                             <field name="code"/>
                             <field name="description"/>
                         </group>

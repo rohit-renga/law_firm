@@ -17,7 +17,7 @@ class AccuseDetails(models.Model):
 
     accuse_id = fields.Char(string='Claimant / Plaintiff' , readonly=True , copy=False)
     image = fields.Binary(string='Image', attachment=True)
-    accuse_name = fields.Char(string='Name',track_visibility='onchange', required=True)
+    accuse_name = fields.Char(string='Name',track_visibility='onchange', required=False)
     accuse_type = fields.Selection([('organisation', 'Organisation'), ('individual', 'Individual')], default='organisation' , string='Type', track_visibility='onchange')
     company_registration_no = fields.Char(string='Company Registration No.')
     account = fields.Integer(
@@ -115,7 +115,7 @@ class AccuseName(models.Model):
     _order = 'create_date desc'
     _inherit = ['mail.thread']
 
-    name = fields.Char(string='Name',required=True,track_visibility='onchange')
+    name = fields.Char(string='Name',required=False,track_visibility='onchange')
 
 class AccuseIDocument(models.Model):
     _name = 'accuse.document'

@@ -28,7 +28,7 @@
                             <field name="registrar_id" readonly="1"/>
                         </h1>
                         <h1>
-                          <field name="registrar_name" placeholder="Registrar Name" required="1"/>
+                          <field name="registrar_name" placeholder="Judicial Officer Name" required="0"/>
                         </h1>
                     </div>
                     <group>

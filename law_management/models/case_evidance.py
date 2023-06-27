@@ -17,7 +17,7 @@ class CaseEvidance(models.Model):
     evidence_case_name = fields.Char(related='evidance_case.case_name', string='Case Name')
     client_name = fields.Many2one('client.client',string='Name', track_visibility='onchange')
     evidance_description = fields.Text(string='Evidence Description',track_visibility='onchange')
-    evidance_name = fields.Many2one('case.trail.evidance.name', string='Evidence',required=True,track_visibility='onchange')
+    evidance_name = fields.Many2one('case.trail.evidance.name', string='Evidence',required=False,track_visibility='onchange')
     evidance_lawyer = fields.Many2one('lawyer.details',related='evidance_case.assign_id', string='Lawyer',track_visibility='onchange')
     evidance_opposition_lawyer = fields.Many2one(
         'opposition.lawyer',related='evidance_case.opp_lawyer_id', string='Claimant/Plaintiff Lawyer',track_visibility='onchange')
@@ -111,7 +111,7 @@ class CaseTrailEvidanceName(models.Model):
     _order = 'create_date desc'
     
 
-    name = fields.Char(string='Name',track_visibility='onchange', required=True)
+    name = fields.Char(string='Name',track_visibility='onchange', required=False)
     value = fields.Boolean(string='True',track_visibility='onchange')
 
 class CaseEvidenceDocument(models.Model):

@@ -24,14 +24,14 @@ class CaseTrail(models.Model):
     client_ids = fields.Many2many(
         'client.client',string='Client Name', related='matter_name.client_name_many', track_visibility='onchange')
     accuse_ids = fields.Many2many('accuse.details', related='matter_name.accuse_ids', string='Claimant / Plaintiff')
-    trail_name = fields.Char(string='Trial Name', required=True,track_visibility='onchange')
-    trail_date = fields.Date(string='Trial Date',default=fields.Date.today() ,required=True,track_visibility='onchange')
-    court_name = fields.Many2one('court.court',related='matter_name.court_id', string='Court', required=True,track_visibility='onchange')
+    trail_name = fields.Char(string='Trial Name', required=False,track_visibility='onchange')
+    trail_date = fields.Date(string='Trial Date',default=fields.Date.today() ,required=False,track_visibility='onchange')
+    court_name = fields.Many2one('court.court',related='matter_name.court_id', string='Court', required=False,track_visibility='onchange')
     court_roomno = fields.Char(string='Court Room No.',track_visibility='onchange')
     judge_name = fields.Many2one(
-        'judge.details',related='matter_name.judge_id', string='Judge', required=True,track_visibility='onchange')
+        'judge.details',related='matter_name.judge_id', string='Judge', track_visibility='onchange')
     lawyer_name = fields.Many2one(
-        'lawyer.details',related='matter_name.assign_id', string='Lawyer', required=True,track_visibility='onchange')
+        'lawyer.details',related='matter_name.assign_id', string='Lawyer', track_visibility='onchange')
     opposition_lawyer_name = fields.Many2one(
         'opposition.lawyer',related='matter_name.opp_lawyer_id', string='Claimant/Plaintiff Lawyer',track_visibility='onchange')
     trail_description = fields.Text(string='Description',track_visibility='onchange')
@@ -124,7 +124,7 @@ class TrailName(models.Model):
     _name = 'trail.name'
     _order = 'create_date desc'
 
-    name = fields.Char(string='Name',required=True,track_visibility='onchange')
+    name = fields.Char(string='Name',required=False,track_visibility='onchange')
 
 
 class CaseTrailDocument(models.Model):

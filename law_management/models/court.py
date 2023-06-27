@@ -46,7 +46,7 @@ class CourtCourt(models.Model):
     court_type = fields.Selection([('judiciary', 'Judiciary'), ('out_of_court', 'Out of Court')],string='Court Type',track_visibility='onchange')
     court_selection = fields.Selection([('supreme','Supreme Court'),
                                         ('high','High Court'),
-                                        ('subordinate','Sub Ordinate Court')], string="Judiciary Type")
+                                        ('subordinate','Subordinate Court')], string="Judiciary Type")
     court_category = fields.Many2one('court.category', string="Court Category")
     high_court_selection = fields.Selection([('civil','Civil Division'),
                                             ('commercial','Commercial Division'),
@@ -163,11 +163,11 @@ class CourtFees(models.Model):
     _inherit = ['mail.thread']
     _description = 'Court Fees'
 
-    matter_id = fields.Many2one('matter.matter', string="Case Number",track_visibility='onchange',required=True)
+    matter_id = fields.Many2one('matter.matter', string="Case Number",track_visibility='onchange',required=False)
     fees_case_name = fields.Char(related='matter_id.case_name', string='Case Name')
     client_name = fields.Many2one('client.client',string='Client Name',track_visibility='onchange')
     accuse_name = fields.Many2one('accuse.details',string='Claimant / Plaintiff Name',track_visibility='onchange')
-    court_name = fields.Many2one('court.court',related='matter_id.court_id',string='Court Name',track_visibility='onchange',required=True)
+    court_name = fields.Many2one('court.court',related='matter_id.court_id',string='Court Name',track_visibility='onchange',required=False)
     amount = fields.Float(string='Amount',track_visibility='onchange')
     date = fields.Date('Date',default=fields.Date.today(),track_visibility='onchange')
     payment_date = fields.Date(string='Date of Payment',track_visibility='onchange')
@@ -201,7 +201,7 @@ class CourtName(models.Model):
     _name = 'court.name'
     _inherit = ['mail.thread']
 
-    name = fields.Char(string='Name',required=True)
+    name = fields.Char(string='Name',required=False)
 
     _sql_constraints = [('name_uniq', 'UNIQUE(name)', 'Name Must Be Unique!')]
 
@@ -209,6 +209,6 @@ class CourtCategory(models.Model):
     _name = 'court.category'
     _inherit = ['mail.thread']
 
-    name = fields.Char(string="Name", required=True)
+    name = fields.Char(string="Name", required=False)
 
     _sql_constraints = [('name_uniq', 'UNIQUE(name)', 'Name Must Be Unique!')]

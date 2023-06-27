@@ -38,7 +38,7 @@
                             <field name="court_admin_id" readonly="1"/>
                           </h1>
                           <h1>
-                            <field name="court_admin_name" placeholder="Name" required="1"/>
+                            <field name="court_admin_name" placeholder="Name" required="0"/>
                           </h1>
                       </div>
                   <group>

@@ -17,7 +17,7 @@ class ClaimDistribution(models.Model):
     claim_id = fields.Many2one("matter.claim", string="Claim ID")
     case_id = fields.Many2one("matter.matter", related='claim_id.case_id', string="Case Number")
     distribution_case_name = fields.Char(related='case_id.case_name', string='Case Name')
-    paid_amount = fields.Float(string="Amount to be paid as per judgement", required=True)
+    paid_amount = fields.Float(string="Amount to be paid as per judgement", required=False)
     client_id = fields.Many2one("client.client", string="Client Name")
     accuse_id = fields.Many2one("accuse.details", string="Claimant / Plaintiff")
     validity_date_amount = fields.Float(string="Paid Amount to court till date", compute="_compute_remain_amount_court")

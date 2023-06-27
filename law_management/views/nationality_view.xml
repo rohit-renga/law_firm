@@ -22,7 +22,7 @@
                 <sheet>
                     <group>
                         <field name="name"/>
-                        <field name="nationality_code" required="1"/>
+                        <field name="nationality_code" required="0"/>
                     </group>
                     <group>
                       <group string="Physical Address">

@@ -33,14 +33,14 @@
                           <field name="accuse_id" readonly="1" />
                       </h1>
                       <h1>
-                        <field name="accuse_name" placeholder="Name" required="1"/>
+                        <field name="accuse_name" placeholder="Name" required="0"/>
                       </h1>
                   </div>
                   <group string="General Information">
                       <group>
-                        <field name="accuse_type" required="1"/>
-                        <field name="company_registration_no" attrs="{'required': [('accuse_type','=','organisation')], 'invisible': ['|',('accuse_type','=','individual'),('accuse_type','=',False)]}"/>
-                        <field name="accuse_nationality" attrs="{'invisible': ['|',('accuse_type','=','organisation'),('accuse_type','=',False)],'required':[('accuse_type','=','individual')]}" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                        <field name="accuse_type" required="0"/>
+                        <field name="company_registration_no"/>
+                        <field name="accuse_nationality" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
                         <field name="accuse_nationality_code" attrs="{'invisible': ['|',('accuse_type','=','organisation'),('accuse_type','=',False)]}" readonly="1"/>
                       </group>
                       <group string="create By">
@@ -196,7 +196,7 @@
                 <sheet>
                     <group>
                       <group>
-                        <field name="accuse_document_id" required="1" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                        <field name="accuse_document_id" required="0" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
                         <field name="doc_name"/>
                         <field name="doc_no"/>
                         <field name="doc_id" widget="many2many_binary"/>

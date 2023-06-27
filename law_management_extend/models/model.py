@@ -38,7 +38,7 @@ class Claimant(models.Model):
 class Defendant(models.Model):
     _inherit = 'accuse.details.defendant'
 
-    name_claimant_firm = fields.Char('Name of claimant/ Firm')
+    name_claimant_firm = fields.Char('Name of Defendant / Respondent')
     nationality = fields.Many2one('res.country','Nationality')
     national_id = fields.Char('National ID')
     contact_details = fields.Text('Contact Details')

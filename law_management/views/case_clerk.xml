@@ -37,7 +37,7 @@
                             <field name="case_clerk_id" readonly="1"/>
                           </h1>
                           <h1>
-                            <field name="case_clerk_name" placeholder="Name" required="1"/>
+                            <field name="case_clerk_name" placeholder="Name" required="0"/>
                           </h1>
                       </div>
                   <group>

@@ -59,12 +59,12 @@
                           <field name="lawyer_id" readonly="1" />
                           </h1>
                           <h1>
-                            <field name="lawyer_name" placeholder="Name" required="1"/>
+                            <field name="lawyer_name" placeholder="Name" required="0"/>
                           </h1>
                       </div>
                       <group string="General Information">
                         <group>
-                          <field name="lawyer_nationality" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' required="1"/>
+                          <field name="lawyer_nationality" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' required="0"/>
                           <field name="lawyer_nationality_code" readonly="1"/>
                         </group>
                         <group>
@@ -234,10 +234,11 @@
                 <sheet>
                     <group>
                       <group>
-                        <field name="lawyer_document_id" required="1" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                        <field name="lawyer_document_id" required="0" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
                         <field name="doc_name"/>
                         <field name="doc_no"/>
                         <field name="doc_id" widget="many2many_binary"/>
+                        <field name="category_id"/>
                       </group>
                       <group>
                         <field name="date"/>

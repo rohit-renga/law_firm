@@ -18,10 +18,10 @@ class CaseClerk(models.Model):
     }
 
     user_id = fields.Many2one(
-    'res.users', string='Related User', required=True,
+    'res.users', string='Related User', required=False,
     ondelete='cascade', help='User-related data of the Case Clerk',store=True)
     image = fields.Binary(string='Image', attachment=True)
-    case_clerk_name = fields.Char(string='Name', ondelete="cascade", track_visibility='onchange', required=True)
+    case_clerk_name = fields.Char(string='Name', ondelete="cascade", track_visibility='onchange', required=False)
     case_clerk_id = fields.Char(string='ID' , readonly=True , copy=False)
     clerk_mobile = fields.Char(
         string='Mobile', track_visibility='onchange')

@@ -17,7 +17,7 @@ class JudgeDetail(models.Model):
     }
 
     user_id = fields.Many2one(
-    'res.users', string='Related User', required=True,
+    'res.users', string='Related User', required=False,
     ondelete='cascade', help='User-related data of the patient',store=True)
     judge_id = fields.Char(string='Judge ID' , readonly=True , copy=False)
     image = fields.Binary(string='Image', attachment=True)

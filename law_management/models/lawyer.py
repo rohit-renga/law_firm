@@ -19,11 +19,11 @@ class LawyerDetails(models.Model):
     }
 
     user_id = fields.Many2one(
-    'res.users', string='Related User', required=True,
+    'res.users', string='Related User', required=False,
     ondelete='cascade', help='User-related data of the Lawyer',store=True)
     lawyer_id = fields.Char(string='Lawyer ID')
     image = fields.Binary(string='Image', attachment=True)
-    lawyer_name = fields.Char(string='Name', ondelete="cascade", track_visibility='onchange', required=True)
+    lawyer_name = fields.Char(string='Name', ondelete="cascade", track_visibility='onchange', required=False)
     lawyer_mobileP = fields.Char(string='Mobile', track_visibility='onchange')
     lawyer_emailP = fields.Char(
         string='Email(Personal)', track_visibility='onchange')
@@ -264,3 +264,4 @@ class LawyerDocument(models.Model):
         'res.users', string="Created By", default=lambda self: self.env.user, readonly="True")
     lawyer_document_id = fields.Many2one(
         'lawyer.details', string='Lawyer')
+    category_id = fields.Many2one('document.category')

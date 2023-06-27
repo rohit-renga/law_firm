@@ -23,7 +23,7 @@
       <field name="name">judge.details.form</field>
       <field name="model">judge.details</field>
       <field name="arch" type="xml">
-          <form string="Registrar Details"  duplicate="false">
+          <form string="Judge / Registrar / Assistant Registrar Details"  duplicate="false">
               <sheet>
                 <field name="image" widget="image" class="oe_avatar" />
                     <div class="oe_title">
@@ -31,11 +31,11 @@
                             <field name="judge_id" readonly="1" />
                         </h1>
                         <h1>
-                          <field name="judge_name" placeholder="Registrar Name" required="1"/>
+                          <field name="judge_name" placeholder="Judge / Registrar / Assistant Registrar Name" required="0"/>
                         </h1>
                     </div>
                       <group>
-                        <group string="Registrar">
+                        <group string="Judge / Registrar / Assistant Registrar">
                             <field name="judge_registrar_id" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
                             <field name="judge_registrar_phone" attrs="{'invisible': [('judge_registrar_id','=',False)]}"/>
                             <field name="judge_registrar_mobile" attrs="{'invisible': [('judge_registrar_id','=',False)]}"/>
@@ -131,7 +131,7 @@
     </record>
 
     <record model="ir.actions.act_window" id="judge_details_action">
-        <field name="name">Registrar</field>
+        <field name="name">Judge / Registrar / Assistant Registrar</field>
         <field name="res_model">judge.details</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form,kanban</field>
@@ -141,7 +141,7 @@
     </record>
 
    
-      <menuitem  id="menu_judge_details" name="Registrar" parent="menu_master_data" sequence="5" action="judge_details_action"/>
+      <menuitem  id="menu_judge_details" name="Judge / Registrar / Assistant Registrar" parent="menu_master_data" sequence="5" action="judge_details_action"/>
       <!--Judge Details End-->
   </data>
 </odoo>

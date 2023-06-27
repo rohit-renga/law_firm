@@ -23,11 +23,11 @@ class MatterMatter(models.Model):
     matter_seq = fields.Char(
         size=256, string='Matter Seq', readonly=True, default='Case ID', copy=False)
     court_category = fields.Many2one('court.category',string="Court Category")
-    caseid = fields.Char("Cause ID", required=True)
-    cause_name = fields.Char("Cause Name", required=True)
+    caseid = fields.Char("Cause ID", required=False)
+    cause_name = fields.Char("Cause Name", required=False)
     case_name = fields.Char(string='Case Name')
     type = fields.Selection(
-        [('civil', 'Civil')],default='civil' ,required=True, string='Parent Category')
+        [('civil', 'Civil')],default='civil' ,required=False, string='Parent Category')
     description = fields.Html(string='Description')
     # description_text = fields.Text(string='Description', compute="get_text_discription")
     case_doc_ids = fields.One2many(
@@ -131,10 +131,10 @@ class MatterMatter(models.Model):
         res.project_id = project_data.id
         return res
 
-    @api.onchange('court_category')
-    def count_court_category(self):
-        if self.court_category:
-            return {'domain': {'court_id': [('court_category', '=', self.court_category.id)]}}
+    # @api.onchange('court_category')
+    # def count_court_category(self):
+    #     if self.court_category:
+    #         return {'domain': {'court_id': [('court_category', '=', self.court_category.id)]}}
 
     # Count
     @api.multi
@@ -456,7 +456,7 @@ class MatterName(models.Model):
     _order = 'create_date desc'
     _inherit = ['mail.thread']
 
-    name = fields.Char(string='Name', required=True,
+    name = fields.Char(string='Name', required=False,
                        track_visibility='onchange')
 
 
@@ -511,3 +511,5 @@ class MatterDocuments(models.Model):
     mat_created_by = fields.Many2one(
         'res.users', string="Created By", default=lambda self: self.env.user, readonly="True")
     matter_document_id = fields.Many2one('matter.matter',string="Case Number")
+    category_id = fields.Many2one('document.category')
+    category_type = fields.Selection([('Plaintiff Lawyer Document','Plaintiff Lawyer Document'),('Lawyer Document','Lawyer Document')],string='Category Type')

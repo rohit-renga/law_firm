@@ -12,8 +12,8 @@ class LawCodeNo(models.Model):
     _description = 'Law Code'
     
 
-    name = fields.Char(string='Code No.',required=True,track_visibility='onchange')
-    short_description = fields.Char(string="Short Description",required=True)
+    name = fields.Char(string='Code No.',required=False,track_visibility='onchange')
+    short_description = fields.Char(string="Short Description",required=False)
     
     _sql_constraints = [('name_uniq', 'UNIQUE(name)', 'Law Code No. Must Be Unique!')]
     

@@ -30,8 +30,8 @@
                     </div>
             		<group>
                     <group>
-                        <field name="art_name" required="1"/>
-                        <field name="article_no" required="1"/>
+                        <field name="art_name" required="0"/>
+                        <field name="article_no" required="0"/>
                         <field name="code_number"/>
                       </group>
                       <group>

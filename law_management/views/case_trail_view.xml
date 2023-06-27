@@ -179,7 +179,7 @@
               <sheet>
                   <group>
                     <group>
-                      <field name="trail_document_id" required="1" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                      <field name="trail_document_id" required="0" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
                       <field name="doc_name"/>
                       <field name="doc_id" widget="many2many_binary"/>
                     </group>

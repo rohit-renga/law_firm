@@ -15,7 +15,7 @@ class RegistrarDetails(models.Model):
     # }
 
     # user_id = fields.Many2one(
-    # 'res.users', string='Related User', required=True,
+    # 'res.users', string='Related User', required=False,
     # ondelete='cascade', help='User-related data of the Registrar',store=True)
     name = fields.Char()
     registrar_id = fields.Char(string='Registrar ID' , readonly=True , copy=False)

@@ -31,9 +31,9 @@
                     </div>
                     <group cols="4">
                         <group>
-                            <field name="act_name" required="1"/>
+                            <field name="act_name" required="0"/>
                             <field name="act_no"/>
-                            <field name="act_type" required="1"/>
+                            <field name="act_type" required="0"/>
                         </group>
                         <group>
                             <field name="act_year"/>

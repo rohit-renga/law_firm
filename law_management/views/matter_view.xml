@@ -77,7 +77,7 @@
                             <field name="case_name"/>
                             <field name="cause_name"/>
                             <field name="type"/>
-                            <field name="category_id" required="1" domain="[('type','=',type)]" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                            <field name="category_id" required="0" domain="[('type','=',type)]" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
                             <field name="client_name" options="{'no_open': True}" invisible="1"/>
                             <field name="client_name_many" widget="many2many_tags" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
                             <field name="accused" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' invisible="1"/>
@@ -99,7 +99,7 @@
                         </group>
                         <group string="Important Dates">
                             <field name="date"/>
-                            <field name="date_open" required="1"/>
+                            <field name="date_open" required="0"/>
                             <field name="trial_date"/>
                             <field name="notify_trial_date" invisible="1"/>
                             <field name="notify_trial_date_week" invisible="1"/>
@@ -457,6 +457,8 @@
                                     <field name="mat_doc_name"/>
                                     <field name="document_case_name"/>
                                     <field name="matter_document_id"/>
+                                    <field name="category_id"/>
+                                    <field name="category_type"/>
                                     <field name="mat_doc_id" widget="many2many_binary"/>
                                 </group>
                                 <group>

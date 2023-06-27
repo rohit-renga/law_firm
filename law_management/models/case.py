@@ -52,4 +52,4 @@ class CaseSubCategory(models.Model):
     _name = 'case.sub.categories'
     _inherit = ['mail.thread']
 
-    name = fields.Char(string='Sub Categories',required=True,track_visibility='onchange')
+    name = fields.Char(string='Sub Categories',required=False,track_visibility='onchange')

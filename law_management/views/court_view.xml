@@ -26,7 +26,7 @@
                   <group>
                     <div class="oe_title">
                       <h1>
-                        <field name="court_name" placeholder="Court Name" required="1"/>
+                        <field name="court_name" placeholder="Court Name" required="0"/>
                       </h1>
                     </div>
                     <div class="oe_button_box" name="button_box">
@@ -46,9 +46,9 @@
                   </group>
                     <group>
                       <group string="Court Details">
-                          <field name="court_type" required="1"/>
-                          <!-- <field name="court_category" attrs="{'invisible': [('court_type','=','out_of_court')]}" required="1"/> -->
-                          <field name="court_selection" attrs="{'invisible': [('court_type','=','out_of_court')]}" required="1" />
+                          <field name="court_type" required="0"/>
+                          <!-- <field name="court_category" attrs="{'invisible': [('court_type','=','out_of_court')]}" required="0"/> -->
+                          <field name="court_selection" attrs="{'invisible': [('court_type','=','out_of_court')]}" required="0" />
                           <field name="high_court_selection" attrs="{'invisible': [('court_selection','!=','high')]}"/>
                           <field name="subordinate_selection" attrs="{'invisible': [('court_selection','!=','subordinate')]}"/>
                           <field name="registry" attrs="{'invisible': [('court_selection','not in',['high','subordinate'])]}"/>
@@ -160,9 +160,9 @@
                     </div>
                     <group>
                         <group>
-                            <field name="court_id" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' required="1"/>
-                            <field name="name" required="1"/>
-                            <field name="room_status" required="1"/>
+                            <field name="court_id" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' required="0"/>
+                            <field name="name" required="0"/>
+                            <field name="room_status" required="0"/>
                         </group>
                         <group>
                           <field name="court_room_created_by" options='{"no_open": True}'/>

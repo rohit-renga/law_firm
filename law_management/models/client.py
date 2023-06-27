@@ -14,13 +14,13 @@ class ClientClient(models.Model):
     _rec_name = 'client_name'
     _inherit = ['mail.thread']
     _description = 'Client'
-    _inherits = {
-        'res.users': 'user_id',
-    }
+    # _inherits = {
+    #     'res.users': 'user_id',
+    # }
 
-    user_id = fields.Many2one(
-    'res.users', string='Related User', required=True,
-    ondelete='cascade', help='User-related data of the Client',store=True)
+    # user_id = fields.Many2one(
+    # 'res.users', string='Related User', required=False,
+    # ondelete='cascade', help='User-related data of the Client',store=True)
     client_id = fields.Char(string='client ID' , readonly=True , copy=False)
     client_name = fields.Char(string='Name', track_visibility='onchange')
     client_type = fields.Selection([('organisation', 'Organisation'), ('individual', 'Individual')], default='organisation' , string='Type', track_visibility='onchange')
@@ -268,14 +268,20 @@ class accountLines(models.Model):
     account_line_id = fields.Many2one('client.client')
 
 
+class ClientDocumentsType(models.Model):
+    _name = 'client.document.type'
+
+    name = fields.Char()
+
+
+
 class ClientDocuments(models.Model):
     _name = 'client.document'
     _order = 'create_date desc'
     _rec_name = 'client_document_id'
     _inherit = ['mail.thread']
     
-    doc_name = fields.Selection(
-        [('national_id', 'National ID'), ('passport', 'Passport'), ('dl', 'Driver’s License'), ('other','Other')], default="national_id", string='Document Type', track_visibility='onchange')
+    doc_name = fields.Many2one('client.document.type', 'Document Type')
     doc_no = fields.Char(string='Document No.')
     doc_id = fields.Many2many('ir.attachment',string='Attachments')
     comment = fields.Text(string='Description')
@@ -283,3 +289,4 @@ class ClientDocuments(models.Model):
     cd_created_by = fields.Many2one(
         'res.users', string="Created By", default=lambda self: self.env.user, readonly="True")
     client_document_id = fields.Many2one('client.client', string='Client Name')
+    category_id = fields.Many2one('document.category')

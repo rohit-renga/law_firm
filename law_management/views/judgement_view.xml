@@ -40,7 +40,7 @@
                         <field name="case" options='{"no_open":1,"no_create": 1, "no_create_edit": 1}'/>
                         <field name="judgement_case_name"/>
                         <field name="type"/>
-                        <field name="category_id" required="1" domain="[('type','=',type)]" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                        <field name="category_id" required="0" domain="[('type','=',type)]" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
                         <field name="client_name" options="{'no_create': True,'no_create_edit': True}"/>
                         <field name="accused" options="{'no_create': True,'no_create_edit': True}"/>
                         <field name="trail_judgement_id"/>
@@ -130,7 +130,7 @@
               <sheet>
                   <group>
                     <group>
-                      <field name="judgement_document_id" required="1" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                      <field name="judgement_document_id" required="0" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
                       <field name="doc_name"/>
                       <field name="doc_id" widget="many2many_binary"/>
                     </group>
@@ -164,6 +164,7 @@
               <tree string="Judgement Category" delete="0" duplicate="false">
                   <field name="type"/>
                   <field name="name"/>
+                  <field name="options"/>
               </tree>
           </field>
       </record>
@@ -175,8 +176,9 @@
             <form string="Judgement Category" duplicate="false">
               <sheet>
                   <group>
-                    <field name="type" required="1"/>
-                    <field name="name" required="1"/>
+                    <field name="type" required="0"/>
+                    <field name="name" required="0"/>
+                    <field name="options"/>
                   </group>
               </sheet>
             </form>

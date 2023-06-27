@@ -20,7 +20,7 @@ class penaltiesForm(models.Model):
     matter_id = fields.Many2one('matter.matter', string='Case Number',track_visibility='onchange')
     case_id = fields.Char(related="matter_id.caseid",
                           string='Case ID')
-    submitted_by = fields.Selection([('client','Client'),('accuse','Claimant / Plaintiff'),('lawyer', 'Lawyer'),('judge', 'Judge')],string="Submitted By",required=True)
+    submitted_by = fields.Selection([('client','Client'),('accuse','Claimant / Plaintiff'),('lawyer', 'Lawyer'),('judge', 'Judge')],string="Submitted By",required=False)
     client_name_id = fields.Many2one('client.client', 'Client', 
                                      ondelete="cascade", track_visibility='onchange')
     accuse_name_id = fields.Many2one(

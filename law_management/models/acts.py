@@ -39,6 +39,6 @@ class ActActName(models.Model):
     _order = 'create_date desc'
     _inherit = ['mail.thread']
 
-    name = fields.Char(string='Name',required=True)
+    name = fields.Char(string='Name',required=False)
 
     _sql_constraints = [('name_uniq', 'UNIQUE(name)', 'Act Name Must Be Unique!!!')]

@@ -43,14 +43,14 @@
                             <field name="client_id" readonly="1" />
                         </h1>
                         <h1>
-                          <field name="client_name" placeholder="Organisation/Individual Client" required="1"/>
+                          <field name="client_name" placeholder="Organisation/Individual Client" required="0"/>
                         </h1>
                     </div>
                   </div>
 
                   <group>
                       <group string="Organisation/Individual Client">
-                        <field name="client_type" required="1"/>
+                        <field name="client_type" required="0"/>
                         <field name="client_nationality" attrs="{'invisible': ['|',('client_type','=','organisation'),('client_type','=',False)],'required':[('client_type','=','individual')]}" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
                         <field name="client_nationality_code" readonly="1" attrs="{'invisible': ['|',('client_type','=','organisation'),('client_type','=',False)]}"/>
                       </group>
@@ -202,10 +202,11 @@
                 <sheet>
                     <group>
                       <group>
-                        <field name="client_document_id" required="1" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                        <field name="client_document_id" required="0" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
                         <field name="doc_name"/>
                         <field name="doc_no"/>
                         <field name="doc_id" widget="many2many_binary"/>
+                        <field name="category_id"/>
                       </group>
                       <group>
                         <field name="date"/>

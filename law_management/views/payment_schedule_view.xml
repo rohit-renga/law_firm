@@ -47,9 +47,9 @@
                                 <field name="payment_category"/>
                             </group>
                             <group>
-                                <field name="schedule_date" required="1"/>
-                                <field name="paid_amount" required="1"/>
-                                <field name="paid_by" required="1"/>
+                                <field name="schedule_date" required="0"/>
+                                <field name="paid_amount" required="0"/>
+                                <field name="paid_by" required="0"/>
                                 <field name="is_paid"/>
                                 <field name="court_id" readonly="1"/>
                             </group>

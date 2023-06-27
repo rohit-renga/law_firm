@@ -13,19 +13,19 @@ class WitnessDetails(models.Model):
     _order = 'create_date desc'
     _inherit = ['mail.thread']
     _description = 'Witness'
-    _inherits = {
-        'res.users': 'user_id',
-    }
+    # _inherits = {
+    #     'res.users': 'user_id',
+    # }
 
-    user_id = fields.Many2one(
-    'res.users', string='Related User', required=True,
-    ondelete='cascade', help='User-related data of the Witness',store=True)
+    # user_id = fields.Many2one(
+    # 'res.users', string='Related User', required=False,
+    # ondelete='cascade', help='User-related data of the Witness',store=True)
     witness_id = fields.Char(string='Witness ID' , readonly=True , copy=False)
     image = fields.Binary(string='Image',attachment=True, track_visibility='onchange')
-    witness_name = fields.Char(string='Witness',track_visibility='onchange', required=True)
+    witness_name = fields.Char(string='Witness',track_visibility='onchange', required=False)
     witness_name_nationality = fields.Many2one('nationality.master',string='Nationality')
     witness_name_nationality_code = fields.Char(related='witness_name_nationality.nationality_code',string='Nationality Code')
-    witness_mobile = fields.Char(string='Mobile', track_visibility='onchange', required=True)
+    witness_mobile = fields.Char(string='Mobile', track_visibility='onchange', required=False)
     witness_phone = fields.Char(string='Phone', track_visibility='onchange')
     witness_email = fields.Char(string='Email', track_visibility='onchange')
     witness_website = fields.Char(string='Website', track_visibility='onchange')

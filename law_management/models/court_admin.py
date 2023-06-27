@@ -18,12 +18,12 @@ class CourtAdmin(models.Model):
     }
 
     user_id = fields.Many2one(
-    'res.users', string='Related User', required=True,
+    'res.users', string='Related User', required=False,
     ondelete='cascade', help='User-related data of the patient',store=True)
     court_ids = fields.Many2many('court.court',string='Court')
     image = fields.Binary(string='Image', attachment=True)
     court_admin_id = fields.Char(string='ID' , readonly=True , copy=False)
-    court_admin_name = fields.Char(string='Name', ondelete="cascade", track_visibility='onchange', required=True)
+    court_admin_name = fields.Char(string='Name', ondelete="cascade", track_visibility='onchange', required=False)
     admin_mobile = fields.Char(
         string='Mobile', track_visibility='onchange')
     admin_email = fields.Char(

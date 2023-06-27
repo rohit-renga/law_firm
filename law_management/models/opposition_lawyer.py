@@ -18,10 +18,10 @@ class OppositionLawyer(models.Model):
     # }
 
     # user_id = fields.Many2one(
-    # 'res.users', string='Related User', required=True,
+    # 'res.users', string='Related User', required=False,
     # ondelete='cascade', help='User-related data of the Claimant/Plaintiff Lawyer',store=True)
     opposition_id = fields.Char(string='Opposition ID',readonly=True , copy=False)
-    opposition_lawyer_name = fields.Char(string='Name', ondelete="cascade", track_visibility='onchange', required=True)
+    opposition_lawyer_name = fields.Char(string='Name', ondelete="cascade", track_visibility='onchange', required=False)
     image = fields.Binary(string='Image', attachment=True)
     opposition_lawyer_type = fields.Selection([('organisation', 'Organisation'), ('individual', 'Individual')], default='organisation' , string='Type', track_visibility='onchange')
     ol_or_company_reg_id = fields.Char(string='Company Regis. ID')
@@ -213,3 +213,4 @@ class OppLawyerDocument(models.Model):
         'res.users', string="Created By", default=lambda self: self.env.user, readonly="True")
     opp_lawyer_document_id = fields.Many2one(
         'opposition.lawyer', string='Claimant/Plaintiff Lawyer')
+    category_id = fields.Many2one('document.category')

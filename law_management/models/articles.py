@@ -40,6 +40,6 @@ class ArtArtName(models.Model):
     _name = 'art.art.name'
     _order = 'create_date desc'
 
-    name = fields.Char(string='Name',required=True,track_visibility='onchange')
+    name = fields.Char(string='Name',required=False,track_visibility='onchange')
 
     _sql_constraints = [('name_uniq', 'UNIQUE(name)', 'Act Name Must Be Unique!!!')]

@@ -13,6 +13,7 @@
     'data': [
 
             'data/sequence.xml',
+            'data/doc.xml',
             'data/trail_scheduler_lawyers.xml',
             'data/trail_scheduler_clients.xml',
             'data/trail_scheduler_accuses.xml',

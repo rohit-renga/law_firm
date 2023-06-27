@@ -33,9 +33,9 @@
                   </div>
                   <group>
                     <group>
-                        <field name="code_number" required="1"/>
+                        <field name="code_number" required="0"/>
                         <field name="is_obselete"/>
-                        <field name="year_in_place" required="1"/>
+                        <field name="year_in_place" required="0"/>
                     </group>
                     <group>
                       <field name="lc_created_by" options='{"no_open": True}'/>
@@ -128,7 +128,7 @@
               <sheet>
                   <group>
                     <group>
-                      <field name="law_code_document_id" required="1" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
+                      <field name="law_code_document_id" required="0" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}'/>
                       <field name="doc_name"/>
                       <field name="doc_no"/>
                       <field name="doc_id" widget="many2many_binary"/>

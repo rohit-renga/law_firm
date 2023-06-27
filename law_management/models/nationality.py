@@ -12,7 +12,7 @@ class Nationality(models.Model):
     _order = 'create_date desc'
     _inherit = ['mail.thread']
 
-    name = fields.Char(string='Name' , required=True)
+    name = fields.Char(string='Name' , required=False)
     nationality_code = fields.Char(string='ID')
     ph_street = fields.Char(string='Street', track_visibility='onchange')
     ph_street2 = fields.Char(

@@ -349,3 +349,5 @@ access_court_category_top_management,court.category,model_court_category,law_man
 access_secretary_details_top_management,secretary.details,model_secretary_details,law_management.group_law_firm_top_management,1,1,1,1
 access_nationality_master_top_management,nationality.master,model_nationality_master,law_management.group_law_firm_top_management,1,1,1,1
 access_registrar_details_top_management,registrar.details,model_registrar_details,law_management.group_law_firm_top_management,1,1,1,1
+access_client_document_type,client.document.type,model_client_document_type,,1,1,1,1
+access_document_category,document.category,model_document_category,,1,1,1,1

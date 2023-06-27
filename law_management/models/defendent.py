@@ -17,7 +17,7 @@ class AccuseDetailsDefendant(models.Model):
 
     accuse_id = fields.Char(string='Claimant / Plaintiff' , readonly=True , copy=False)
     image = fields.Binary(string='Image', attachment=True)
-    accuse_name = fields.Char(string='Name',track_visibility='onchange', required=True)
+    accuse_name = fields.Char(string='Name',track_visibility='onchange', required=False)
     accuse_type = fields.Selection([('organisation', 'Organisation'), ('individual', 'Individual')], default='organisation' , string='Type', track_visibility='onchange')
     company_registration_no = fields.Char(string='Company Registration No.')
     account = fields.Integer(
@@ -125,9 +125,4 @@ class Mater(models.Model):
     _inherit = 'matter.matter'
 
     accused_defendent = fields.Many2one('accuse.details.defendant',string='Defendant')
-
-
-class AccuseIDocument(models.Model):
-    _inherit = 'accuse.document'
     
-    accuse_document_id = fields.Many2one('accuse.details.defendant',string='Claimant / Plaintiff Document')

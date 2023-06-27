@@ -34,16 +34,16 @@
                           <field name="witness_id" readonly="1" />
                       </h1>
                       <h1>
-                          <field name="witness_name" placeholder="Witness Name" required="1"/>  
+                          <field name="witness_name" placeholder="Witness Name" required="0"/>  
                       </h1>
                   </div>
               <group>
                   <group string="General Information">
-                    <field name="witness_name_nationality" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' required="1"/>
+                    <field name="witness_name_nationality" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' required="0"/>
                     <field name="witness_name_nationality_code" readonly="1"/>
                   </group>
                   <group string="Contact Information">
-                    <field name="witness_mobile" required="1"/>
+                    <field name="witness_mobile" required="0"/>
                     <field name="witness_phone"/>
                     <field name="witness_email"/>
                     <field name="witness_website"/>
@@ -54,28 +54,28 @@
                 <group string="Physical Address">
                     <label for="street" string="Address"/>
                     <div class="o_address_format">
-                        <field name="street" placeholder="Street..." class="o_address_street" required="1"/>
-                        <field name="street2" placeholder="Street 2..." class="o_address_street" required="1"/>
-                        <field name="city_id" placeholder="City" class="o_address_city" style="width: 48%" required="1"/>
-                        <field name="village" placeholder="Village" class="o_address_city" required="1"/>
-                        <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open":True}' context="{'country_id': country_id,'zip': zip}" style="width: 48%" required="1"/>
+                        <field name="street" placeholder="Street..." class="o_address_street" required="0"/>
+                        <field name="street2" placeholder="Street 2..." class="o_address_street" required="0"/>
+                        <field name="city_id" placeholder="City" class="o_address_city" style="width: 48%" required="0"/>
+                        <field name="village" placeholder="Village" class="o_address_city" required="0"/>
+                        <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open":True}' context="{'country_id': country_id,'zip': zip}" style="width: 48%" required="0"/>
                         <field name="zip" placeholder="ZIP" class="o_address_zip" style="width: 48%" />
                         <field name="district_id" placeholder="District" style="width: 52%"/>
-                        <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open":True, "no_create": True}' required="1"/>
+                        <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open":True, "no_create": True}' required="0"/>
                     </div>
                 </group>
                 <group string="Postal Address">
                     <field name="copy_address"/>
                     <label for="postal_street" string="Postal Address"/>
                     <div class="o_address_format">
-                        <field name="postal_street" placeholder="Street..." class="o_address_street" required="1"/>
-                        <field name="postal_street2" placeholder="Street 2..." class="o_address_street" required="1"/>
-                        <field name="postal_city_id" placeholder="City" class="o_address_city" style="width: 48%" required="1"/>
-                        <field name="postal_village" placeholder="Village" class="o_address_city" required="1"/>
-                        <field name="postal_state_id" class="o_address_state" placeholder="State" options='{"no_open":True}' context="{'country_id': postal_country_id,'zip': postal_zip}" style="width: 48%" required="1"/>
+                        <field name="postal_street" placeholder="Street..." class="o_address_street" required="0"/>
+                        <field name="postal_street2" placeholder="Street 2..." class="o_address_street" required="0"/>
+                        <field name="postal_city_id" placeholder="City" class="o_address_city" style="width: 48%" required="0"/>
+                        <field name="postal_village" placeholder="Village" class="o_address_city" required="0"/>
+                        <field name="postal_state_id" class="o_address_state" placeholder="State" options='{"no_open":True}' context="{'country_id': postal_country_id,'zip': postal_zip}" style="width: 48%" required="0"/>
                         <field name="postal_zip" placeholder="ZIP" class="o_address_zip" style="width: 48%"/>
                         <field name="postal_district_id" placeholder="District" style="width: 52%"/>
-                        <field name="postal_country_id" placeholder="Country" class="o_address_country" options='{"no_open":True, "no_create": True}' required="1"/>
+                        <field name="postal_country_id" placeholder="Country" class="o_address_country" options='{"no_open":True, "no_create": True}' required="0"/>
                     </div>
                 </group>
               </group>
@@ -181,7 +181,7 @@
                 <sheet>
                     <group>
                       <group>
-                        <field name="witness_document_id" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' required="1"/>
+                        <field name="witness_document_id" options='{"no_open": True,"no_create": 1, "no_create_edit": 1}' required="0"/>
                         <field name="doc_name"/>
                         <field name="doc_no"/>
                         <field name="doc_id" widget="many2many_binary"/>
